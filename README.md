@@ -3,6 +3,13 @@ Composite Laminate Theory
 
 **Version 0.0.1**
 
+## Features
+
+-	Composite laminate theory
+-	Maximum stress failure criterion
+-	Tsai-Hill failure criterion
+
+
 *abd*, the ABD matrix and its inverse
 
 *failure_criteria*, composites failure criteria. For the moment, ‘Tsai-Hill’ and ‘Maximum stress’ are included. Further failure criteria will be added soon.
