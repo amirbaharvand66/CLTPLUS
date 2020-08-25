@@ -2,9 +2,10 @@ function [M] = transformation_matrix_plane_stress(theta)
 % transformation matrxi (M) for transforming each ply local coordinate
 % system to the global coordinate system
 
-
 % INPUT(S)
 % theta : ply angle
+
+% originally coded by Amir Baharvand (08-20)
     
 for ii = 1:length(theta)
     c = cosd(theta(ii));

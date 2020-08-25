@@ -1,12 +1,12 @@
 function [ft] = failure_type(type, varargin)
 % define the failure tyoe in fiber / matrix or transverse failure
 
-
 % INPUT(S)
 % type : failure criterion ('strs' for maximum stress / 'strn' for maximum strain)
 % for maximum stress criterion varargin : 's', [s11, s22, s__x, s__y]
 % for maximum strain criterion varargin : 'e', [e11, e22, e__x, e__y]
 
+% originally coded by Amir Baharvand (08-20)
 
 % parsing the output
 p = inputParser;

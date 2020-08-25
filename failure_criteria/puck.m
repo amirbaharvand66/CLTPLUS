@@ -1,7 +1,6 @@
 function [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % Puck (Hashin-Rotem) failure criterion
 
-
 % INPUT(S)
 % theta : ply angle
 % ls : local stress for each ply
@@ -11,6 +10,8 @@ function [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % Yc : transverse compression strength
 % S : shear strength
 % id : laminate id
+
+% originally coded by Amir Baharvand (08-20)
 
 
 % plot envelope

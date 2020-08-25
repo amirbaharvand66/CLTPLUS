@@ -1,10 +1,8 @@
 function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls, fail_rpt] = clt(mat, varargin)
 % thick composite laminate theory
 
-
 % INPUT(S)
 % mat: material properties
-
 
 % OUTPUT(S)
 % A : A matrix
@@ -24,6 +22,7 @@ function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls, fail
 % gs : laminate global stress
 % ls : laminate local stress
 
+% originally coded by Amir Baharvand (08-20)
 
 %%%%%%%%%%%%%PARSING FUNCTION INPUTS%%%%%%%%%%%%%
 % parsing the output

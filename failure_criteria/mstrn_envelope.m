@@ -1,7 +1,6 @@
 function mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 % plot maximum strain failure envelope
 
-
 % INPUT(S)
 % eXt : longitudinal tensite ultimate strain
 % eXc : longitudinal compression ultimate strain
@@ -9,6 +8,8 @@ function mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 % eYc : transverse compression ultimate strain
 % eXY : shear ultimate strain
 % id : laminate id
+
+% originally coded by Amir Baharvand (08-20)
 
 n = 2; % number of contours
 

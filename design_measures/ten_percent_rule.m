@@ -4,9 +4,10 @@ function [tag, zero_of_tot, p45_of_tot, m45_of_tot, ninty_of_tot] = ten_percent_
 % share 10% of laminate total thickness for various load cases so that in case of
 % failure, a brittle incautious will not happen.
 
-
 % INPUT(S)
 % mat: material properties
+
+% originally coded by Amir Baharvand (08-20)
 
 tag = {'0 deg'; '45 deg'; '-45 deg'; '90 deg'};
 zero = find(mat.ply.theta == 0); % 0 degree

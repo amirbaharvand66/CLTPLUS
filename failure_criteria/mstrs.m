@@ -1,7 +1,6 @@
 function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % maximum stress failure criterion
 
-
 % INPUT(S)
 % theta : ply angle
 % ls : local stress for each ply
@@ -12,6 +11,7 @@ function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % S : shear strength
 % id : laminate id
 
+% originally coded by Amir Baharvand (08-20)
 
 % plot envelope
 figure()

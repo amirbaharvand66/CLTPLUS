@@ -1,13 +1,13 @@
 function [a, b, c, d] = abd_inv(A, B, D)
 % abd inverse matrices 
 
-
 % INPUT(S)
 % A : A matrix
 % B : B matrix
 % D : D matrix
 % h : laminate total thickness
 
+% originally coded by Amir Baharvand (08-20)
 
 B_ = -A \ B; % - inv(A) * B
 C_ = B / A; % B * inv(A)

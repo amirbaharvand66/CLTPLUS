@@ -1,7 +1,6 @@
 function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % maximum strain failure criterion
 
-
 % INPUT(S)
 % theta : ply angle
 % le : local strain for each ply
@@ -18,6 +17,7 @@ function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt
 % S : shear strength
 % id : laminate id
 
+% originally coded by Amir Baharvand (08-20)
 
 % plot envelope
 figure()

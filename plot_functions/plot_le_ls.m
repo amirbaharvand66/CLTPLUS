@@ -1,7 +1,6 @@
 function plot_le_ls(le, ls, zc, t, theta, id)
 % plot local stress-strain
 
-
 % INPUT(S)
 % le : laminate local strain
 % ls : laminate local stress
@@ -9,6 +8,7 @@ function plot_le_ls(le, ls, zc, t, theta, id)
 % theta : ply angle
 % id : laminate id
 
+% originally coded by Amir Baharvand (08-20)
 
 % plotting local strain
 figure('units','normalized','outerposition',[0 0 1 1])

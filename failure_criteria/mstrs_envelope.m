@@ -1,7 +1,6 @@
 function mstrs_envelope(Xt, Xc, Yt, Yc, S, all_fc)
 % plot maximum stress failure envelope
 
-
 % INPUT(S)
 % Xt : longitudinal tensite strength
 % Xc : longitudinal compression strength
@@ -10,6 +9,7 @@ function mstrs_envelope(Xt, Xc, Yt, Yc, S, all_fc)
 % S : shear strength
 % id : laminate id
 
+% originally coded by Amir Baharvand (08-20)
 
 n = 2; % number of contours
 

@@ -1,12 +1,12 @@
 function [mbrn, bnd] = lam_moduli(a, d, h)
 % laminate stiffness properties (membrane and bending)
 
-
 % INPUT(S)
 % a : A inverse matrix
 % d : D inverse matrix
 % h : laminate total thickness
 
+% originally coded by Amir Baharvand (08-20)
 
 mbrn_tag = {'E1m', 'E2m', 'G12m', 'v12m', 'v21m'};
 mbrn = zeros(1, 5); % membrane

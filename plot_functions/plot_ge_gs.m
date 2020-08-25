@@ -1,7 +1,6 @@
 function plot_ge_gs(ge, gs, zc, t, theta, id)
 % plot global stress-strain
 
-
 % INPUT(S)
 % ge : laminate global strain
 % gs : laminate global stress
@@ -9,6 +8,7 @@ function plot_ge_gs(ge, gs, zc, t, theta, id)
 % theta : ply angle
 % id : laminate id
 
+% originally coded by Amir Baharvand (08-20)
 
 % plotting local strain
 figure('units','normalized','outerposition',[0 0 1 1])

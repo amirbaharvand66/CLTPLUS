@@ -1,7 +1,6 @@
 function clt_report(id, mat, ABD, abd, mbrn, bnd, loading, me0k0, zc, ge, gs, le, ls, fail_rpt, fail_crtrn)
 % reporting for composite laminate theory
 
-
 % INPUT(S)
 % laminate: composite laminate
 % mat: material properties
@@ -9,10 +8,10 @@ function clt_report(id, mat, ABD, abd, mbrn, bnd, loading, me0k0, zc, ge, gs, le
 % loading: loading type ('ek' / 'nm')
 % fail_crtrn: failure criterion
 
-
 % OUTPUT(S)
 % results from CLT module in a formatted Excel worksheet
 
+% originally coded by Amir Baharvand (08-20)
 
 % turn off warning of added specified worksheet
 warning( 'off', 'MATLAB:xlswrite:AddSheet' );
