@@ -10,9 +10,6 @@ function plot_le_ls(le, ls, zc, t, theta, id)
 % id : laminate id
 
 
-% originally coded by Amir Baharvand (08-2020)
-
-
 % plotting local strain
 figure('units','normalized','outerposition',[0 0 1 1])
 set(gcf, 'NumberTitle','off')

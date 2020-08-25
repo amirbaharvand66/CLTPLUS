@@ -1,4 +1,4 @@
-function [A, B, D, Q, z] = abd(lam)
+function [A, B, D, Q, z, v21] = abd(lam)
 % ABD calculator for plane stress
 
 
@@ -8,9 +8,6 @@ function [A, B, D, Q, z] = abd(lam)
 % D : D matrix
 % Q : reduced stiffness matrix for plane stress
 % z : laminate thickness coordinates
-
-
-% originally coded by Amir Baharvand (08-2020)
 
 
 E11 = lam.mat.E11;

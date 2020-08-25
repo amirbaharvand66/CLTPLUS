@@ -16,6 +16,7 @@ mat(n).ply.t = ones(1, 4) * mat(n).mat.t_ply;
 mat(n).ply.theta = [0, 90, 45, -45];
 mat(n).id = n;
 
+
 % loading
 mat(n).load.N = [126; 0; 0]; % e.g. N/mm
 mat(n).load.m = [0; 0; 0]; % e.g. N.mm / mm
