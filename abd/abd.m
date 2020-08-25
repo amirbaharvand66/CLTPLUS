@@ -10,6 +10,9 @@ function [A, B, D, Q, z] = abd(lam)
 % z : laminate thickness coordinates
 
 
+% originally coded by Amir Baharvand (08-2020)
+
+
 E11 = lam.mat.E11;
 E22 = lam.mat.E22;
 G12 = lam.mat.G12;

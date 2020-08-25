@@ -21,6 +21,9 @@ function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls] = cl
 % ls : laminate local stress
 
 
+% originally coded by Amir Baharvand (08-2020)
+
+
 % parsing the output
 default_load = 'nm'; % force-moment
 default_global_strsstrn = 'on'; % plot global stress-strain

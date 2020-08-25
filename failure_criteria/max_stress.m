@@ -11,6 +11,10 @@ function max_stress(theta, ls, Xt, Xc, Yt, Yc, S, id)
 % Yc : transverse compression strength
 % S : shear strength
 
+
+% originally coded by Amir Baharvand (08-2020)
+
+
 fprintf('******************************************\n')
 fprintf('Maximum Stress Failure Criterion - Laminate %d\n', id)
 fprintf('     FAILURE = 1     Without failure = 0\n')

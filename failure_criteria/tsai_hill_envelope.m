@@ -2,6 +2,8 @@ function tsai_hill_envelope(Xt, Xc, Yt, Yc, S, id)
 % plot Tsai_Hill failure envelope
 
 
+% originally coded by Amir Baharvand (08-2020)
+
 n = 50; % number of contours
 
 set(gcf, 'NumberTitle', 'off')

@@ -2,6 +2,9 @@ function max_stress_envelope(Xt, Xc, Yt, Yc, S, id)
 % plot maximum stress failure envelope
 
 
+% originally coded by Amir Baharvand (08-2020)
+
+
 n = 2; % number of contours
 
 set(gcf, 'NumberTitle', 'off')

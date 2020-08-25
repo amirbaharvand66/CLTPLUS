@@ -5,6 +5,9 @@ function [M] = transformation_matrix_plane_stress(theta)
 
 % INPUT(S)
 % theta : ply angle
+
+
+% originally coded by Amir Baharvand (08-2020)
     
 for ii = 1:length(theta)
     c = cosd(theta(ii));

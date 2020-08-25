@@ -9,6 +9,9 @@ function [a, b, c, d, lam_mbrn, lam_bnd] = lam_moduli(A, B, D, h)
 % h : laminate total thickness
 
 
+% originally coded by Amir Baharvand (08-2020)
+
+
 B_ = -A \ B; % - inv(A) * B
 C_ = B / A; % B * inv(A)
 D_ = D - C_ * B; % D - ( B * inv(A) ) * B
