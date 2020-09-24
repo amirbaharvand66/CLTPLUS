@@ -1,32 +1,28 @@
 n = 2; % for laminate id
-mat(n).mat.E11 = 142e3; % longitudinal Young's modulus
-mat(n).mat.E22 = 13e3; % transverse Young's modulus
-mat(n).mat.G12 = 5e3; % in-plane shear modulus
-mat(n).mat.v12 = 0.3; % in-plane Poisson's ratio
-mat(n).mat.t_ply = 0.16; % ply thickness (in case of same thickness for plies) [mm]
-mat(n).mat.Xt = 2200; % longitudinal tensite strength
-mat(n).mat.Xc = -1850; % longitudinal compression strength
-mat(n).mat.Yt = 55; % transverse tensite strength
-mat(n).mat.Yc = -200; % transverse compression strength
-mat(n).mat.S = 120; % shear strength
 
+% lamina name
+% N.B. with underscore and no space / hyphen
+lamina_name = "mat2";
 
-% reuired in case of choosing "maximum strain" as the failure criterion [%]
-% mat(n).mat.eXt = mat(n).mat.Xt / mat(n).mat.E11; % longitudinal tensite ultimate strain
-% mat(n).mat.eXc = mat(n).mat.Xc / mat(n).mat.E11; % longitudinal compression ultimate strain
-% mat(n).mat.eYt = mat(n).mat.Yt / mat(n).mat.E22; % transverse tensite ultimate strain
-% mat(n).mat.eYc = mat(n).mat.Yc / mat(n).mat.E22; % transverse compression ultimate strain
-% mat(n).mat.eXY = mat(n).mat.S  / mat(n).mat.G12; % shear ultimate strain
-
+% mechanical properties
+mat.(string(lamina_name)).mprop.E11 = 142e3; % longitudinal Young's modulus
+mat.(string(lamina_name)).mprop.E22 = 13e3; % transverse Young's modulus
+mat.(string(lamina_name)).mprop.G12 = 5e3; % in-plane shear modulus
+mat.(string(lamina_name)).mprop.v12 = 0.3; % in-plane Poisson's ratio
+mat.(string(lamina_name)).mprop.Xt = 2200; % longitudinal tensite strength
+mat.(string(lamina_name)).mprop.Xc = -1850; % longitudinal compression strength
+mat.(string(lamina_name)).mprop.Yt = 55; % transverse tensite strength
+mat.(string(lamina_name)).mprop.Yc = -200; % transverse compression strength
+mat.(string(lamina_name)).mprop.S = 120; % shear strength
 
 % ply thickness and angle
-mat(n).ply.t = ones(1, 8) * mat(n).mat.t_ply;
-mat(n).ply.theta = [0, -45, 0, 90, 45, 0, 0, 0];
-mat(n).id = n;
-
+mat.(string(lamina_name)).ply.t_ply = 0.16; % ply thickness (in case of same thickness for plies) [mm]
+mat.(string(lamina_name)).ply.t = ones(1, 6) * mat.(string(lamina_name)).ply.t_ply;
+mat.(string(lamina_name)).ply.theta = [0, -45, -30, 30, 45, 0];
+mat.(string(lamina_name)).id = n;
 
 % loading
-mat(n).load.N = [1200; 0; 0]; % e.g. N/mm
-mat(n).load.m = [0; 0; 0]; % e.g. N.mm / mm
-mat(n).load.e0 = [0; 0; 0]; % e.g. mm / mm
-mat(n).load.k0 = [3.3e-3; 0; 0]; % e.g. 1 / mm
+mat.(string(lamina_name)).load.N = [1400; 42; 0]; % e.g. N/mm
+mat.(string(lamina_name)).load.m = [0; 0; 0]; % e.g. N.mm / mm
+mat.(string(lamina_name)).load.e0 = [0; 0; 0]; % e.g. mm / mm
+mat.(string(lamina_name)).load.k0 = [3.3e-3; 0; 0]; % e.g. 1 / mm

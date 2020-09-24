@@ -21,7 +21,7 @@ sy = ( (sign(y) + 1) / 2 ) .* Yt + ( (sign(y) - 1) / 2 ) .* Yc;
 
 txy = real(sqrt(((1 - ( y.^2 ./ sy.^2)) * S^2)));
 
-if strcmp(all_fc, 'on') == 1
+if strcmpi(all_fc, 'on') == 1
     mesh(x, y, txy, 'FaceAlpha', 0.1, 'FaceColor','c', 'FaceAlpha',0.1, 'EdgeColor','none')
     hold on
     mesh(x, y, -txy, 'FaceAlpha', 0.1, 'FaceColor','c', 'FaceAlpha',0.1, 'EdgeColor','none')

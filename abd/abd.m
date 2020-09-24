@@ -1,19 +1,23 @@
-function [A, B, D, Q, z, v21] = abd(lam)
+function [A, B, D, Q, z, v21] = abd(t, theta, E11, E22, G12, v12)
 % ABD calculator for plane stress
 
 % INPUT(S)
+% t : ply thickness
+% theta : ply angle
+% E11 : longitudinal Young's modulus
+% E22 : transverse Young's modulus
+% G12 : in-plane shear modulus
+% v12 : in-plane Poisson's ratio
+
+% OUTPUT(S)
 % A : A matrix
 % B : B matrix
 % D : D matrix
 % Q : reduced stiffness matrix for plane stress
 % z : laminate thickness coordinates
+% v21 : in-plane Poisson's ratio
 
 % originally coded by Amir Baharvand (08-20)
-
-E11 = lam.mat.E11;
-E22 = lam.mat.E22;
-G12 = lam.mat.G12;
-v12 = lam.mat.v12;
 
 
 % Reuter matrix
@@ -25,8 +29,8 @@ v21 = E22 / E11 * v12;
 
 
 % calculating the coordinate for each ply
-h = sum(lam.ply.t); % sum of the laminate
-z = zeros(1, length(lam.ply.t) +1 ); % ply coordinate
+h = sum(t); % sum of the laminate
+z = zeros(1, length(t) +1 ); % ply coordinate
 z(1) = -h / 2; % neural plane assumed at h/2
 
 
@@ -34,8 +38,8 @@ z(1) = -h / 2; % neural plane assumed at h/2
 % this will be compensated by extension–bending
 % coupling elements in the final “stiffness”
 % matrix formulation
-for ii = 1:length(lam.ply.t)
-    z(ii + 1) = lam.ply.t(ii) + z(ii);
+for ii = 1:length(t)
+    z(ii + 1) = t(ii) + z(ii);
 end
 
 
@@ -55,9 +59,9 @@ A = zeros(3);
 B = zeros(3);
 D = zeros(3);
 
-for ii = 1:length(lam.ply.theta)
+for ii = 1:length(theta)
     % transformation matrxi (M)
-    M = transformation_matrix_plane_stress(lam.ply.theta(ii));
+    M = transformation_matrix_plane_stress(theta(ii));
     
     % transformed reduced stiffness matrix
     q = M \ Q * R * M / R; % inv(M) * Q * R * M * inv(R)

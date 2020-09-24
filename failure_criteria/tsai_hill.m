@@ -15,7 +15,7 @@ function [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 
 % plot envelope
 figure()
-if strcmp(all_fc, 'on') == 1
+if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
@@ -98,10 +98,10 @@ fail_rpt = [fail_tag; ply_num, theta_c, position, flag_vec ,fidx_vec, ft_vec]; %
 
 
 % displaying failure report
-fprintf('**********************************************************************\n')
+fprintf('**************************************************************************************\n')
 fprintf('\t\t Tsai-Hill Failure Criterion - Laminate %d\n', id)
 fprintf('\t\t    FAILURE = 1     Without failure = 0\n')
-fprintf('**********************************************************************\n')
+fprintf('**************************************************************************************\n')
 fprintf('Ply no. \t Ply angle \t Position \t\t Status \t Failure index \t Failure Type\n')
 
 for ii = 2:size(fail_rpt, 1)

@@ -7,6 +7,7 @@ Composite Laminate Theory
 - 10% percent rule!
 - Puck failure criterion
 - Maximum strain failure criterion
+- compare all available failure criteria
 - Matrix/fiber failure and Failure index in relevant failure criteria  
 - Function documentation improved
 - Improved input options with parsing

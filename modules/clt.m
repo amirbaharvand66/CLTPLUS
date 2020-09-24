@@ -1,4 +1,6 @@
-function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls, fail_rpt] = clt(mat, varargin)
+function  [laminate] = clt(mat, varargin)
+% function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls, fail_rpt, ...
+%     abd_name] = clt(mat, varargin)
 % thick composite laminate theory
 
 % INPUT(S)
@@ -22,7 +24,7 @@ function  [A, B, D, Q, a, b, c, d, mbrn, bnd, z, zc, me0k0, ge, le, gs, ls, fail
 % gs : laminate global stress
 % ls : laminate local stress
 
-% originally coded by Amir Baharvand (08-20)
+% originally coded by Amir Baharvand (AB) (08-20)
 
 %%%%%%%%%%%%%PARSING FUNCTION INPUTS%%%%%%%%%%%%%
 % parsing the output
@@ -34,7 +36,7 @@ default_failure = ''; % failure criterion
 valid_load = {'nm', 'ek'};
 valid_global_strsstrn = {'on', 'off'};
 valid_local_strsstrn = {'on', 'off'}; 
-valid_failure = {'', 'mstrs', 'mstrn', 'TH','PHR', 'all'};
+valid_failure = {'mstrs', 'mstrn', 'TH','PHR', 'all'};
 valid_report = {'on', 'off'}; 
 % parser checker
 check_load = @(x) any(validatestring(x, valid_load));
@@ -55,19 +57,27 @@ parse(p, mat, varargin{:}); % parsing p
 
 
 % assigning material properties
-t = mat.ply.t;
-theta = mat.ply.theta;
-id = mat.id;
-E11 = mat.mat.E11; % longitudinal Young's modulus
-E22 = mat.mat.E22; % transverse Young's modulus
-G12 = mat.mat.G12; % in-plane shear modulus
-v12 = mat.mat.v12; % in-plane Poisson's ratio
-Xt = mat.mat.Xt;
-Xc = mat.mat.Xc;
-Yt = mat.mat.Yt;
-Yc = mat.mat.Yc;
-S = mat.mat.S;
-if strcmp(p.Results.failure, 'mstrn') || strcmp(p.Results.failure, 'all')== 1
+lam = fieldnames(p.Results.mat); % laminate name
+t = mat.(lam{:}).ply.t;
+theta = mat.(lam{:}).ply.theta;
+id = mat.(lam{:}).id;
+E11 = mat.(lam{:}).mprop.E11; % longitudinal Young's modulus
+E22 = mat.(lam{:}).mprop.E22; % transverse Young's modulus
+G12 = mat.(lam{:}).mprop.G12; % in-plane shear modulus
+v12 = mat.(lam{:}).mprop.v12; % in-plane Poisson's ratio
+Xt = mat.(lam{:}).mprop.Xt; % longitudinal tensite strength
+Xc = mat.(lam{:}).mprop.Xc; % longitudinal compression strength
+Yt = mat.(lam{:}).mprop.Yt; % transverse tensite strength
+Yc = mat.(lam{:}).mprop.Yc; % transverse compression strength
+S = mat.(lam{:}).mprop.S; % shear strength
+e0 = mat.(lam{:}).load.e0; % applied strain
+k0 = mat.(lam{:}).load.k0; % applied curvature
+N = mat.(lam{:}).load.N; % applied force
+m = mat.(lam{:}).load.m; % applied moment
+
+
+% ultimate strain values for maximum strain failure criterion
+if strcmpi(p.Results.failure, 'mstrn') || strcmpi(p.Results.failure, 'all')
     eXt = Xt / E11; % longitudinal tensite ultimate strain
     eXc = Xc / E11; % longitudinal compression ultimate strain
     eYt = Yt / E22; % transverse tensite ultimate strain
@@ -81,24 +91,27 @@ R = reuter_matrix();
 
 
 % calculating ABD matrix
-[A, B, D, Q, z, v21] = abd(mat);
+[A, B, D, Q, z, v21] = abd(t, theta, E11, E22, G12, v12);
 ABD = [A, B; B, D];
 h = sum(t); % laminate total thickness
 
 
 % ABD inverse matrices (abd)
 [a, b, c, d] = abd_inv(A, B, D);
+ABD_inv = [a b; c d];
 
 
 % laminate stiffness properties (membrane and bending)
-[mbrn, bnd] = lam_moduli(a, d, h);
+[lam_typ] = lam_type(t, theta); % detecting laminate type
+[mbrn, bnd] = lam_moduli(B, D, a, d, h, lam_typ);
+
 
 
 % mid-plane(m) strains(e0) and curvatures(k) (me0k)
-if strcmp(p.Results.load, 'ek') == 1
-    me0k0 = [mat.load.e0; mat.load.k0];
-elseif strcmp(p.Results.load, 'nm') == 1
-    me0k0 = ABD \ [mat.load.N; mat.load.m];
+if strcmpi(p.Results.load, 'ek')
+    me0k0 = [e0; k0];
+elseif strcmpi(p.Results.load, 'nm')
+    me0k0 = ABD \ [N; m];
 end
 
 
@@ -176,19 +189,18 @@ end
 
 
 % plot global strains (le) and global stress (ls) distribution
-if strcmp(p.Results.global, 'on') == 1
+if strcmpi(p.Results.global, 'on')
     plot_ge_gs(ge, gs, zc, t, theta, id)
 end
 
 % plot local strains (le) and local stress (ls) distribution
-if strcmp(p.Results.local, 'on') == 1
+if strcmpi(p.Results.local, 'on')
     plot_le_ls(le, ls, zc, t, theta, id)
 end
 
 % failure criteria
-if strcmp(p.Results.failure, '') == 1
-    fprintf('N.B. No failure criterion is selected!!! \n')
-elseif strcmp(p.Results.failure, 'mstrs') == 1
+failure = lower(p.Results.failure);
+if strcmpi(failure, 'mstrs')
     % Maximum stress failure criterion
     all_fc = 'off';
     [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -197,7 +209,7 @@ elseif strcmp(p.Results.failure, 'mstrs') == 1
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Maximum stress', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmp(p.Results.failure, 'mstrn') == 1
+elseif strcmpi(failure, 'mstrn')
     % Maximum strain failure criterion
     all_fc = 'off';
     [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -206,7 +218,7 @@ elseif strcmp(p.Results.failure, 'mstrn') == 1
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Maximum Stress', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmp(p.Results.failure, 'TH') == 1
+elseif strcmpi(failure, 'TH')
     % Tsai_Hill failure criterion
     all_fc = 'off';
     [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -215,7 +227,7 @@ elseif strcmp(p.Results.failure, 'TH') == 1
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Tsai-Hill', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmp(p.Results.failure, 'PHR') == 1
+elseif strcmpi(failure, 'PHR')
     % Puck (Hashin-Rotem) failure criterion
     all_fc = 'off';
     [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -224,7 +236,7 @@ elseif strcmp(p.Results.failure, 'PHR') == 1
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Puck', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmp(p.Results.failure, 'all') == 1
+elseif strcmpi(failure, 'all')
     % All failure criteria
     all_fc = 'on';
     [~] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -241,15 +253,31 @@ elseif strcmp(p.Results.failure, 'all') == 1
     lgd(6) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Maximum stress', 'Maximum Stress', 'Tsai-Hill', 'Puck', 'Unfailed', 'Failed'}...
         , 'Interpreter', 'latex', 'FontSize', 15)
-%     legend('1', '2', '3', '4')
+    
+else
+    fprintf('Select from one of the options: ')
+    fprintf('%s ', valid_failure{:})
+    fprintf('\n')
+    error('INVALID INPUT!!!')
 end
 
 
 % report
-if strcmp(p.Results.report, 'on') == 1
-    ABD_inv = [a b; c d];
-    clt_report(id, mat, ABD, ABD_inv, mbrn, bnd, p.Results.load, me0k0, zc, ge, gs, le, ls, fail_rpt, p.Results.failure)
+if strcmpi(p.Results.report, 'on')
+    clt_report(id, mat, lam, ABD, ABD_inv, mbrn, bnd, p.Results.load, me0k0, zc, ge, gs, le, ls, fail_rpt, p.Results.failure)
 end
 
+
+% saving laminate data
+laminate.abd.A = A;                             laminate.abd.B = B;                                     laminate.abd.D = D;
+laminate.abd.Q = Q;                            laminate.prop.v21 = v21;
+laminate.abd.a = a;                              laminate.abd.b = b;
+laminate.abd.bTranspose = c;             laminate.abd.d = d;
+laminate.prop.mbrn = mbrn;              laminate.prop.mbrn = bnd;
+laminate.ply.z = z;                               laminate.ply.zc = zc; 
+laminate.strsstrn.me0k0 = me0k0;      
+laminate.strsstrn.gblstrn = ge;            laminate.strsstrn.lclstrn = ls;
+laminate.strsstrn.gblstrs = gs;             laminate.strsstrn.lclstrs = ls;
+laminate.rpt.failure = fail_rpt;
 
 

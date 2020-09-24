@@ -26,7 +26,7 @@ switch p.Results.type
         if ( abs(s11) >= s__x )
             ft = 'Fiber';
         elseif ( abs(s22) >= s__y )
-            ft = 'Marix';
+            ft = 'Matrix';
         else
             ft = 'Transverse';
         end
@@ -41,7 +41,7 @@ switch p.Results.type
         if ( abs(e11) >= e__x )
             ft = 'Fiber';
         elseif ( abs(e22) >= e__y )
-            ft = 'Marix';
+            ft = 'Matrix';
         else
             ft = 'Transverse';
         end

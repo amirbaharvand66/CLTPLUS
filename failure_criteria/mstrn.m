@@ -21,7 +21,7 @@ function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt
 
 % plot envelope
 figure()
-if strcmp(all_fc, 'on') == 1
+if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
