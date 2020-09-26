@@ -31,12 +31,13 @@ function  [laminate] = clt(mat, varargin)
 default_load = 'nm'; % force-moment
 default_global_strsstrn = 'on'; % plot global stress-strain
 default_local_strsstrn = 'on'; % plot local stress-strain
-default_failure = ''; % failure criterion
+default_failure = 'off'; % failure criterion
+default_report = 'off'; % failure criterion
 % paerse valid option(s)
 valid_load = {'nm', 'ek'};
 valid_global_strsstrn = {'on', 'off'};
 valid_local_strsstrn = {'on', 'off'}; 
-valid_failure = {'mstrs', 'mstrn', 'TH','PHR', 'all'};
+valid_failure = {'off', 'mstrs', 'mstrn', 'TH','PHR', 'all'};
 valid_report = {'on', 'off'}; 
 % parser checker
 check_load = @(x) any(validatestring(x, valid_load));
@@ -51,7 +52,7 @@ addParameter(p, 'load', default_load, check_load);
 addParameter(p, 'global', default_global_strsstrn, check_global_strsstrn);
 addParameter(p, 'local', default_local_strsstrn, check_local_strsstrn);
 addParameter(p, 'failure', default_failure, check_failure);
-addParameter(p, 'report', default_failure, check_report);
+addParameter(p, 'report', default_report, check_report);
 parse(p, mat, varargin{:}); % parsing p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -200,7 +201,9 @@ end
 
 % failure criteria
 failure = lower(p.Results.failure);
-if strcmpi(failure, 'mstrs')
+if strcmpi(failure, 'off')
+    ;
+elseif strcmpi(failure, 'mstrs')
     % Maximum stress failure criterion
     all_fc = 'off';
     [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
@@ -278,6 +281,8 @@ laminate.ply.z = z;                               laminate.ply.zc = zc;
 laminate.strsstrn.me0k0 = me0k0;      
 laminate.strsstrn.gblstrn = ge;            laminate.strsstrn.lclstrn = ls;
 laminate.strsstrn.gblstrs = gs;             laminate.strsstrn.lclstrs = ls;
-laminate.rpt.failure = fail_rpt;
+if strcmp(failure, 'off') == 0
+    laminate.rpt.failure = fail_rpt;
+end
 
 
