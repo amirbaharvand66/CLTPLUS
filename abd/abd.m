@@ -34,7 +34,7 @@ z = zeros(1, length(t) +1 ); % ply coordinate
 z(1) = -h / 2; % neural plane assumed at h/2
 
 
-% N.B. that is not TRUE for asymmetric laminates, but
+% N.B. that is NOT TRUE for an asymmetric laminate, but
 % this will be compensated by extension–bending
 % coupling elements in the final “stiffness”
 % matrix formulation

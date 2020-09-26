@@ -17,8 +17,8 @@ mat.(string(lamina_name)).mprop.S = 120; % shear strength
 
 % ply thickness and angle
 mat.(string(lamina_name)).ply.t_ply = 0.16; % ply thickness (in case of same thickness for plies) [mm]
-mat.(string(lamina_name)).ply.t = ones(1, 6) * mat.(string(lamina_name)).ply.t_ply;
-mat.(string(lamina_name)).ply.theta = [0, -45, -30, 30, 45, 0];
+mat.(string(lamina_name)).ply.t = ones(1, 4) * mat.(string(lamina_name)).ply.t_ply;
+mat.(string(lamina_name)).ply.theta = [0, 90, 45, 30];
 mat.(string(lamina_name)).id = n;
 
 % loading

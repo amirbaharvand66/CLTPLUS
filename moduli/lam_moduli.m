@@ -1,6 +1,6 @@
 function [mbrn, bnd] = lam_moduli(B, D, a, d, h, lam_typ)
 % laminate stiffness properties (membrane and bending)
-% only for symmetric and balanced laminates
+% only for symmetric and balanced laminate
 % a symmetric laminate has a symmetric stacking sequence of the same
 % material and thickness, e.g., [0, 45, -30, -30, 45, 0]
 % a balanced laminate has the same number of positive and negative
