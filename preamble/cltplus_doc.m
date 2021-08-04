@@ -2,6 +2,8 @@ function cltplus_doc()
 %                                           CLTPLUS
 % A Tool for th Classical Laminate Plate Theory for Composites
 % ----------------------------------------------------------------
+% Start from "mat_prop" folder by defining ply mechanical properties.
+% The available options are
 % 'load' = ‘nm’ force-moment
 %             ‘ek’ strain-survature
 % 'global' (plot global stress-strain) 'on' / 'off'
