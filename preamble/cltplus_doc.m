@@ -1,10 +1,12 @@
 function cltplus_doc()
-% composite laminate theory - v 0.0.3
+%                                           CLTPLUS
+% A Tool for th Classical Laminate Plate Theory for Composites
+% ----------------------------------------------------------------
 % 'load' = ‘nm’ force-moment
 %             ‘ek’ strain-survature
 % 'global' (plot global stress-strain) 'on' / 'off'
 % 'local' (plot local stress-strain) 'on' / 'off'
-% 'failure' = '' deafult value : no failure criterion
+% 'failure' = 'off' deafult value : no failure criterion
 % N.B. for the failure criteria, s11 and mainly represent fiber and matrix
 % failure, respectively.
 %                  'mstrs' maximum stress failure criterion
