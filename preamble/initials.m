@@ -4,5 +4,6 @@ set(groot, 'defaultAxesTickLabelInterpreter','latex'); set(groot, 'defaultLegend
 
 
 % add paths of functions
+addpath(genpath('./abd'));
 addpath(genpath('./modules'));
 addpath(genpath('./lekhnitskii'));
