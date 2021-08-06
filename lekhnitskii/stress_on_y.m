@@ -35,11 +35,17 @@ for ii = 1:length(y_vec)
     [sigma_c(ii, :)] = stress_car(s_k, d_phi);
 end
 
+% remove meaningless stress result inside hole
+y = [y_vec(y_vec < -1), NaN, y_vec(y_vec > 1)];
+s1 = sigma_c(:, 1); sx = [s1(y_vec < -1); NaN; s1(y_vec > 1)];
+s2 = sigma_c(:, 2); sy = [s2(y_vec < -1); NaN; s2(y_vec > 1)];
+s3 = sigma_c(:, 3); sxy = [s3(y_vec < -1); NaN; s3(y_vec > 1)];
+
 figure('position', [0 0 800 600])
 hold on
-plot(y_vec, sigma_c(:, 1), 'k', 'LineWidth', 2)
-plot(y_vec, sigma_c(:, 2), '--k', 'LineWidth', 2)
-plot(y_vec, sigma_c(:, 3), ':k', 'LineWidth', 2)
+plot(y, sx, 'k', 'LineWidth', 2)
+plot(y, sy, '--k', 'LineWidth', 2)
+plot(y, sxy, ':k', 'LineWidth', 2)
 plot_hole(0, 0, 1) % plot hole
 set(gca, 'FontSize', 20)
 xlabel('$y/r$','Interpreter','latex', 'FontSize', 25)
