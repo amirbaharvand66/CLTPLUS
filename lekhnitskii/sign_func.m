@@ -21,21 +21,17 @@ switch x
         for k = 1:2
             switch k
                 case 1 % k = 1
-%                     if mod(theta, 90) == 0
-                        if sign(y) == sign(imag(delta(k)))
-                            sign_delta(k) = 1;
-                        else
-                            sign_delta(k) = -1;
-                        end
-%                     end
+                    if sign(y) == sign(imag(delta(k)))
+                        sign_delta(k) = 1;
+                    else
+                        sign_delta(k) = -1;
+                    end
                 case 2 % k = 2
-%                     if mod(theta, 90) == 0
-                        if sign(y) == sign(imag(delta(k)))
-                            sign_delta(k) = 1;
-                        else
-                            sign_delta(k) = -1;
-                        end
-%                     end
+                    if sign(y) == sign(imag(delta(k)))
+                        sign_delta(k) = 1;
+                    else
+                        sign_delta(k) = -1;
+                    end
             end
         end
         %%%%%%%%%%%%%%
