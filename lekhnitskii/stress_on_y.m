@@ -36,10 +36,10 @@ for ii = 1:length(y_vec)
 end
 
 % remove meaningless stress result inside hole
-y = [y_vec(y_vec < -1), NaN, y_vec(y_vec > 1)];
-s1 = sigma_c(:, 1); sx = [s1(y_vec < -1); NaN; s1(y_vec > 1)];
-s2 = sigma_c(:, 2); sy = [s2(y_vec < -1); NaN; s2(y_vec > 1)];
-s3 = sigma_c(:, 3); sxy = [s3(y_vec < -1); NaN; s3(y_vec > 1)];
+y = [y_vec(y_vec <= -1), NaN, y_vec(y_vec >= 1)];
+s1 = sigma_c(:, 1); sx = [s1(y_vec <= -1); NaN; s1(y_vec >= 1)];
+s2 = sigma_c(:, 2); sy = [s2(y_vec <= -1); NaN; s2(y_vec >= 1)];
+s3 = sigma_c(:, 3); sxy = [s3(y_vec <= -1); NaN; s3(y_vec >= 1)];
 
 figure('position', [0 0 800 600])
 hold on
@@ -51,6 +51,7 @@ set(gca, 'FontSize', 20)
 xlabel('$y/r$','Interpreter','latex', 'FontSize', 25)
 ylabel('$\sigma_{ij}/p$' ,'Interpreter','latex', 'FontSize', 25)
 legend('$\sigma_{x}$', '$\sigma_{y}$', '$\tau_{xy}$','Interpreter','latex', 'FontSize', 20)
+title('Stress along y-axis','Interpreter','latex', 'FontSize', 20)
 box on
 xlim([y_min, y_max])
 ylim([y_min, y_max])
