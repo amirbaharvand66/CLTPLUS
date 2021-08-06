@@ -1,12 +1,11 @@
-function [S] = compliance_cal(h, A)
+function [S] = compliance_cal(h, a)
 % Laminate compliance calculator
 
 % INPUT(S)
 % h: laminate thickness
-% A: A part of the ABD matrix
+% a: "a" part of the inverse ABD matrix
 
 % OUTPUT(S)
 % S: compliance matrix
 
-C = 1 / h * A; % stiffness matrix
-S = inv(C);
+S = 1 / h * a; 
