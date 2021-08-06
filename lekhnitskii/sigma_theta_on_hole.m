@@ -36,7 +36,7 @@ for ii = 1:length(theta)
     [sigma_p(ii, :)] = stress_polar(sigma_c(ii, :), theta(ii));
 end
 
-fig_sigma_r = figure (1);
+fig_sigma_r = figure (102);
 hold on
 set(fig_sigma_r, 'Pos', [0 0 800 600])
 plot(deg2rad(theta), sigma_p(:, 2), 'LineStyle', mkr, 'Color', 'k', 'LineWidth', 2, 'DisplayName', sprintf('%d%sHole radius', R, '$\times$'))
