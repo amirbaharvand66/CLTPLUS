@@ -1,5 +1,5 @@
 function [c_k] = c_k_cal(p, p_h, s_k)
-% Mapped disturbance Field Constant
+% Mapped disturbance field constant
 
 % INPUT(S)
 % p: load at infinity
