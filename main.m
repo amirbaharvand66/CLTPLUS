@@ -9,6 +9,6 @@ initials()
 % and application of the present code
 
 laminate_name = 'mat2'; % laminate name as appeared in CLTPLUS
-load clt_output.mat; % load laminate data from CLTPLUS
+clt_output = 'clt_output'; % data from CLTPLUS
 
-lekhnitskii
+lekhnitskii(laminate_name, clt_output)
