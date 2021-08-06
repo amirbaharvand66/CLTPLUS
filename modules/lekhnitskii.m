@@ -1,4 +1,14 @@
+function lekhnitskii(lamina_name, clt_output)
+% Lekhnistkii formulation for an orthotropic elastic domain with a circular
+% hole
+
+% INPUT(S)
+% laminate_name: laminate name as appeared in CLTPLUS
+% clt_output: data from CLTPLUS
+
 % read data from clt.m
+file_name = strcat(clt_output, '.mat');
+load(file_name) ; % load laminate data from CLTPLUS
 h = laminate.(string(lamina_name)).ply.h; % h: laminate thickness
 A = laminate.(string(lamina_name)).abd.A; % A: A part of the ABD matrix
 p = mat.mat2.lekh.load; % load at infinity
@@ -24,24 +34,13 @@ theta = linspace(0 + epsilon, 360 - epsilon, n); % angle on the hole edge
 [c_k] = c_k_cal(p, p_h, s_k);
 
 % Stress distribution on hole edge
-% stress_on_hole(epsilon, theta, R, alpha, beta, s_k, h_k, c_k)
+stress_on_hole(epsilon, theta, R, alpha, beta, s_k, h_k, c_k)
 
 % Stress distribution on x-axis
-% stress_on_x(-10, 10, -8, 8, n, theta, alpha, beta, s_k, h_k, c_k)
+stress_on_x(-10, 10, -10, 10, n, theta, alpha, beta, s_k, h_k, c_k)
 
 % Stress distribution on y-axis
-% stress_on_y(-8, 8, -10, 10, n, theta, alpha, beta, s_k, h_k, c_k)
+stress_on_y(-8, 8, -10, 10, n, theta, alpha, beta, s_k, h_k, c_k)
 
-R = [1, 5, 10];
-mkr = {':', '--', '-'};
-% for ii = 1:length(R)
-%     sigma_r_on_hole(epsilon, theta, R(ii), alpha, beta, s_k, h_k, c_k, mkr{ii})
-% end
-
-% for ii = 1:length(R)
-%     sigma_theta_on_hole(epsilon, theta, R(ii), alpha, beta, s_k, h_k, c_k, mkr{ii})
-% end
-
-for ii = 1:length(R)
-    tau_rt_on_hole(epsilon, theta, R(ii), alpha, beta, s_k, h_k, c_k, mkr{ii})
-end
+% Calculate stress components at various distance from hole edge
+stress_on_distance(epsilon, theta, alpha, beta, s_k, h_k, c_k, [1, 5, 10])
