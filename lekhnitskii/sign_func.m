@@ -34,7 +34,6 @@ switch x
                     end
             end
         end
-        %%%%%%%%%%%%%%
     otherwise
         for k = 1:2
             switch k
