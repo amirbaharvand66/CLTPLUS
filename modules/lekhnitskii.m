@@ -10,7 +10,7 @@ function lekhnitskii(lamina_name, clt_output)
 file_name = strcat(clt_output, '.mat');
 load(file_name) ; % load laminate data from CLTPLUS
 h = laminate.(string(lamina_name)).ply.h; % h: laminate thickness
-A = laminate.(string(lamina_name)).abd.A; % A: A part of the ABD matrix
+a_abd = laminate.(string(lamina_name)).abd.a; % A: "a" part of the inverse ABD matrix
 p = mat.mat2.lekh.load; % load at infinity
 p_h = mat.mat2.lekh.hole; % load on hole edge
 R = 1; % hole radius
@@ -19,7 +19,7 @@ n = 100; % number of divisons
 theta = linspace(0 + epsilon, 360 - epsilon, n); % angle on the hole edge
 
 % laminate compliance matrix
-[S] = compliance_cal(h, A);
+[S] = compliance_cal(h, a_abd);
 
 % directionality and angularity 
 [r, a] = dir_ang_cal(S);
