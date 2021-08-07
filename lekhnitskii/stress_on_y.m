@@ -47,7 +47,7 @@ plot(y, sx, 'k', 'LineWidth', 2)
 plot(y, sy, '--k', 'LineWidth', 2)
 plot(y, sxy, ':k', 'LineWidth', 2)
 plot_hole(0, 0, 1) % plot hole
-set(gca, 'FontSize', 20)
+set(gca, 'FontSize', 15)
 xlabel('$y/r$','Interpreter','latex', 'FontSize', 25)
 ylabel('$\sigma_{ij}/p$' ,'Interpreter','latex', 'FontSize', 25)
 legend('$\sigma_{x}$', '$\sigma_{y}$', '$\tau_{xy}$','Interpreter','latex', 'FontSize', 20)

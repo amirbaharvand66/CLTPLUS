@@ -40,7 +40,7 @@ fig_sigma_r = figure (102);
 hold on
 set(fig_sigma_r, 'Pos', [0 0 800 600])
 plot(deg2rad(theta), sigma_p(:, 2), 'LineStyle', mkr, 'Color', 'k', 'LineWidth', 2, 'DisplayName', sprintf('%d%sHole radius', R, '$\times$'))
-set(gca, 'FontSize', 20)
+set(gca, 'FontSize', 15)
 xticks([0 + epsilon, pi/2, pi, 3*pi/2, 2*pi - epsilon])
 xticklabels({'0', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$'})
 xlabel('$\theta$[rad]','Interpreter','latex', 'FontSize', 25)
