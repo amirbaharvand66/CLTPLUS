@@ -1,14 +1,13 @@
-function lekhnitskii(lamina_name, clt_output)
+function lekhnitskii(lamina_name, mat, laminate)
 % Lekhnistkii formulation for an orthotropic elastic domain with a circular
 % hole
 
 % INPUT(S)
 % laminate_name: laminate name as appeared in CLTPLUS
-% clt_output: data from CLTPLUS
+% mat: ply mechanical properties
+% laminate: laminate mechanical properties
 
 % read data from clt.m
-file_name = strcat(clt_output, '.mat');
-load(file_name) ; % load laminate data from CLTPLUS
 h = laminate.(string(lamina_name)).ply.h; % h: laminate thickness
 a_abd = laminate.(string(lamina_name)).abd.a; % A: "a" part of the inverse ABD matrix
 p = mat.mat2.lekh.load; % load at infinity
