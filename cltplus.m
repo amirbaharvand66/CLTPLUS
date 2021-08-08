@@ -12,14 +12,9 @@ mat2
 % type in "help cltplus_doc" in command window for documentation on input
 % parameters
 [laminate.(string(lamina_name))] = ...
-    clt(mat, 'load', 'nm', 'global', 'off', 'local', 'off', 'failure', 'TH', 'report', 'off');
+    clt(mat, 'load', 'nm', 'global', 'off', 'local', 'off', 'failure', 'off', 'report', 'off', 'save_output', 'off');
 
+% Lekhnitskii theory for orthotrpic plate with a circular hole
 % type in "help lekhnitskii_doc" in command window for documentation, assumptions
 % and application of the present code
-
-laminate_name = 'mat2'; % laminate name as appeared in CLTPLUS
-clt_output = 'clt_output'; % data from CLTPLUS
-
-lekhnitskii(laminate_name, clt_output)
-
-
+lekhnitskii(lamina_name, mat, laminate)
