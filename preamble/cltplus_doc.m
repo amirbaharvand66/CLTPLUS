@@ -17,3 +17,4 @@ function cltplus_doc()
 %                  'PHR' Puck (Hashin-Rotem) failure criterion
 %                  'all' compare all failure criteria
 % report 'on' / 'off'
+% save_output 'on' / 'off'

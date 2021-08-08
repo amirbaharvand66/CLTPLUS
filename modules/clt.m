@@ -32,19 +32,22 @@ default_load = 'nm'; % force-moment
 default_global_strsstrn = 'on'; % plot global stress-strain
 default_local_strsstrn = 'on'; % plot local stress-strain
 default_failure = 'off'; % failure criterion
-default_report = 'off'; % failure criterion
+default_report = 'off'; % report
+default_save_output = 'off'; % save output workspace
 % paerse valid option(s)
 valid_load = {'nm', 'ek'};
 valid_global_strsstrn = {'on', 'off'};
 valid_local_strsstrn = {'on', 'off'}; 
 valid_failure = {'off', 'mstrs', 'mstrn', 'TH','PHR', 'all'};
 valid_report = {'on', 'off'}; 
+valid_save_output = {'on', 'off'}; 
 % parser checker
 check_load = @(x) any(validatestring(x, valid_load));
 check_global_strsstrn = @(x) any(validatestring(x, valid_global_strsstrn));
 check_local_strsstrn = @(x) any(validatestring(x, valid_local_strsstrn));
 check_failure = @(x) any(validatestring(x, valid_failure));
 check_report = @(x) any(validatestring(x, valid_report));
+check_save_output = @(x) any(validatestring(x, valid_save_output));
 % parsing operation
 p = inputParser;
 addRequired(p, 'mat');
@@ -53,6 +56,7 @@ addParameter(p, 'global', default_global_strsstrn, check_global_strsstrn);
 addParameter(p, 'local', default_local_strsstrn, check_local_strsstrn);
 addParameter(p, 'failure', default_failure, check_failure);
 addParameter(p, 'report', default_report, check_report);
+addParameter(p, 'save_output', default_save_output, check_save_output);
 parse(p, mat, varargin{:}); % parsing p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -202,7 +206,7 @@ end
 % failure criteria
 failure = lower(p.Results.failure);
 if strcmpi(failure, 'off')
-    ;
+    fail_rpt = {};
 elseif strcmpi(failure, 'mstrs')
     % Maximum stress failure criterion
     all_fc = 'off';
@@ -270,6 +274,11 @@ if strcmpi(p.Results.report, 'on')
     clt_report(id, mat, lam, ABD, ABD_inv, mbrn, bnd, p.Results.load, me0k0, zc, ge, gs, le, ls, fail_rpt, p.Results.failure)
 end
 
+% save output / workspace
+if strcmpi(p.Results.save_output, 'on')
+    save('clt_output.mat')
+end
+
 
 % saving laminate data
 laminate.abd.A = A;                             laminate.abd.B = B;                                     laminate.abd.D = D;
@@ -277,7 +286,7 @@ laminate.abd.Q = Q;                            laminate.prop.v21 = v21;
 laminate.abd.a = a;                              laminate.abd.b = b;
 laminate.abd.bTranspose = c;             laminate.abd.d = d;
 laminate.prop.mbrn = mbrn;              laminate.prop.mbrn = bnd;
-laminate.ply.z = z;                               laminate.ply.zc = zc; 
+laminate.ply.z = z;                               laminate.ply.zc = zc;                                     laminate.ply.h = h;  
 laminate.strsstrn.me0k0 = me0k0;      
 laminate.strsstrn.gblstrn = ge;            laminate.strsstrn.lclstrn = ls;
 laminate.strsstrn.gblstrs = gs;             laminate.strsstrn.lclstrs = ls;

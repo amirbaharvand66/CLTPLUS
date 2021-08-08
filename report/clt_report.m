@@ -14,6 +14,7 @@ function clt_report(id, mat, lam, ABD, abd, mbrn, bnd, loading, me0k0, zc, ge, g
 
 % originally coded by Amir Baharvand (08-20)
 
+
 % turn off warning of added specified worksheet
 warning( 'off', 'MATLAB:xlswrite:AddSheet' );
 
@@ -95,7 +96,9 @@ ply_angle = t(ceil((1:length(t  ) * 2) / 2));
 ply_thk = t(ceil((1:length(t  ) * 2) / 2));
 position = repmat({'top surface'; 'bottom surface'}, length(t), 1);
 % name of failure criterion
-if strcmpi(fail_crtrn, 'mstrs')
+if strcmpi(fail_crtrn, 'off')
+    fail_crtrn = repmat({'off'}, 1, length(t) * 2);
+elseif strcmpi(fail_crtrn, 'mstrs')
     fail_crtrn = repmat({'Maximum stress'}, 1, length(t) * 2);
 elseif strcmpi(fail_crtrn, 'mstrn')
     fail_crtrn = repmat({'Maximum strain'}, 1, length(t) * 2);
@@ -107,5 +110,9 @@ end
 xlswrite(rpt_file_name, [ply_no' mat_no' ply_angle' ply_thk' zc'], sheet, 'A38');
 xlswrite(rpt_file_name, position, sheet, 'F38');
 xlswrite(rpt_file_name, [ge gs le ls], sheet, 'G38');
-xlswrite(rpt_file_name, [fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_crtrn'], sheet, 'S38');
+if strcmpi(fail_crtrn, 'off')
+    xlswrite(rpt_file_name, [fail_crtrn'], sheet, 'S38');
+else
+    xlswrite(rpt_file_name, [fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_crtrn'], sheet, 'S38');
+end
 
