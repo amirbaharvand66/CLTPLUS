@@ -15,13 +15,13 @@ function [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 
 
 % plot envelope
-figure()
 if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
     puck_envelope(Xt, Xc, Yt, Yc, S, all_fc)
 else
+    figure()
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('Puck (Hashin-Rotem) Failure Criterion - Laminate %d', id))
     hold on

@@ -20,13 +20,13 @@ function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-figure()
 if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
     mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 else
+    figure()
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('Maximum Strain Failure Criterion - Laminate %d', id))
     hold on

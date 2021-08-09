@@ -14,13 +14,13 @@ function [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-figure()
 if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
     tsai_hill_envelope(Xt, Xc, Yt, Yc, S, all_fc)
 else
+    figure()
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('Tsai-Hill Failure Criterion - Laminate %d', id))
     hold on

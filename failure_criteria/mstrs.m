@@ -14,13 +14,13 @@ function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-figure()
 if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
     hold on
     mstrs_envelope(Xt, Xc, Yt, Yc, S, all_fc)
 else
+    figure()
     set(gcf, 'NumberTitle', 'off')
     set(gcf, 'Name', sprintf('Maximum Stress Failure Criterion - Laminate %d', id))
     hold on
