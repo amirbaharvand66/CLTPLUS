@@ -43,3 +43,6 @@ stress_on_y(-8, 8, -10, 10, n, theta, alpha, beta, s_k, h_k, c_k)
 
 % Calculate stress components at various distance from hole edge
 stress_on_distance(epsilon, theta, alpha, beta, s_k, h_k, c_k, [1, 5, 10])
+
+% Hole deformation
+displ_on_hole(S, theta, epsilon, R, alpha, beta, s_k, h_k, c_k)
