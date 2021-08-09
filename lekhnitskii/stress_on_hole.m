@@ -38,6 +38,8 @@ for ii = 1:length(theta)
 end
 
 figure('position', [0 0 800 600])
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', 'Stress on Hole Edge - Cartesian')
 hold on
 plot(deg2rad(theta), sigma_c(:, 1), 'k', 'LineWidth', 2)
 plot(deg2rad(theta), sigma_c(:, 2), '--k', 'LineWidth', 2)
@@ -52,6 +54,8 @@ xlim([deg2rad(theta(1)), deg2rad(theta(end))])
 box on
 
 figure('position', [0 0 800 600])
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', 'Stress on Hole Edge - Polar')
 hold on
 plot(deg2rad(theta), sigma_p(:, 1), 'k', 'LineWidth', 2)
 plot(deg2rad(theta), sigma_p(:, 2), '--k', 'LineWidth', 2)

@@ -42,6 +42,8 @@ s2 = sigma_c(:, 2); sy = [s2(x_vec <= -1); NaN; s2(x_vec >= 1)];
 s3 = sigma_c(:, 3); sxy = [s3(x_vec <= -1); NaN; s3(x_vec >= 1)];
 
 figure('position', [0 0 800 600])
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', 'Stress along x-axis')
 hold on
 plot(x, sx, 'k', 'LineWidth', 2)
 plot(x, sy, '--k', 'LineWidth', 2)
@@ -51,7 +53,6 @@ set(gca, 'FontSize', 15)
 xlabel('$x/r$','Interpreter','latex', 'FontSize', 25)
 ylabel('$\sigma_{ij}/p$' ,'Interpreter','latex', 'FontSize', 25)
 legend('$\sigma_{x}$', '$\sigma_{y}$', '$\tau_{xy}$','Interpreter','latex', 'FontSize', 20)
-title('Stress along x-axis','Interpreter','latex', 'FontSize', 20)
 box on
 xlim([y_min, y_max])
 ylim([y_min, y_max])
