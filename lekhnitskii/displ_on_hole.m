@@ -34,7 +34,7 @@ for ii = 1:length(theta)
 end
 
 % extract the scientific part of maximum total displacement (sqrt(c^2 + v^2))
-[sci_part, disp_res] = disp_normalizer(displ);
+[sci_part, disp_res] = displ_normalizer(displ);
 theta_rad = deg2rad(theta);
 sf = max(disp_res / (10^sci_part));
 
