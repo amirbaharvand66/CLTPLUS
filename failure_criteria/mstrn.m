@@ -22,7 +22,7 @@ function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt
 % plot envelope
 if strcmpi(all_fc, 'on') == 1
     set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('All Failure Criterion - Laminate %d', id))
+    set(gcf, 'Name', sprintf('All Failure Criteria - Laminate %d', id))
     hold on
     mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 else
