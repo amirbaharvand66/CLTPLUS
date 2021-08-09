@@ -33,6 +33,23 @@ for ii = 1:length(theta)
     [displ(ii, :)] = displ_cal(S, s_k, phi);
 end
 
+% extract the scientific part of maximum total displacement (sqrt(c^2 + v^2))
+[sci_part, disp_res] = disp_normalizer(displ);
+theta_rad = deg2rad(theta);
+sf = max(disp_res / (10^sci_part));
+
+figure('position', [0 0 800 600])
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', sprintf('Hole Deformation - scaling factor %f', sf))
+polarplot(theta_rad, disp_res / (10^sci_part), 'k', 'LineWidth', 2)
+hold on
+polarplot(theta_rad, sin(theta_rad).^2 + cos(theta_rad).^2, '--k', 'LineWidth', 2)
+% polarplot properties
+pp_prop = gca;
+pp_prop.ThetaAxisUnits = 'radians';
+set(gca,'FontSize', 15, 'FontName', 'Times New Roman')
+legend('Deformed', 'Undeformed','Interpreter','latex', 'FontSize', 20)
+
 figure('position', [0 0 800 600])
 set(gcf, 'NumberTitle', 'off')
 set(gcf, 'Name', 'Hole Deformation')
