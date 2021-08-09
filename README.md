@@ -5,4 +5,4 @@ The available modules are
 1. Classical Laminate Plate Theory
 2. Lekhnitskii theory for orthotrpic plate with a circular hole
 
-<img src = "images/all_failure_criteria.jpg" width = "100">
+<img src = "images/all_failure_criteria.jpg" width = "1000">
