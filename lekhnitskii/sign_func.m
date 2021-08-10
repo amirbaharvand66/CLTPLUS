@@ -1,5 +1,13 @@
 function [sign_delta] = sign_func(theta, alpha, beta, x, y, delta)
 % delta sign function
+% reference
+% 1. Koussios. Continuity of the solutions obtained by lekhnitskii’s theory for anisotropic
+% plates:Sign selection strategies. In TE Lacy, R Sullivan, and AJ Vizzini, editors,
+% Proceedings ofthe American Society of Composites, pages 1–20. DEStech 
+% publications, Inc., 2008. null ;Conference date: 09-09-2008 Through 11-09-2008.
+
+% 2. Koussios, S.Stress Concentrations around Holes Lecture Notes. Faculty of Aerospace 
+%Engineering, Delft University of Technology, Delft, 2015
 
 % INPUT(S)
 % sign_delta: sign of delta
