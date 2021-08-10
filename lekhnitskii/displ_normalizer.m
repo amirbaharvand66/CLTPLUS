@@ -13,6 +13,6 @@ v = displ(:, 2);
 
 d = sqrt(u.^2 + v.^2);
 tmp = max(d);
-str_tmp = sprintf("%0.5e", tmp)
+str_tmp = sprintf("%0.5e", tmp);
 split_tmp = strsplit(str_tmp, 'e');
 split_tmp_con = str2double(split_tmp{2});
