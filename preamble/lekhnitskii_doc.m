@@ -16,4 +16,4 @@ function lekhnitskii_doc()
 % 2. The traction boundary-value problem
 % 3. Thin plate where Composite Classical Laminate 
 % Theory is applicable
-% 4. A circular hole with unit radius
+% 4. A circular hole with unit radius located at origin
