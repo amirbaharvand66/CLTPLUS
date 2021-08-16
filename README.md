@@ -23,4 +23,5 @@ Stress distribution around a circular hole based on Lekhnitskii theory
 <img src = "images/stress_around_hole_y_axis.jpg" width = "500">
 
 Hole deformation based on Lekhnitskii theory
+
 <img src = "images/hole_deformation.jpg" width = "500">
