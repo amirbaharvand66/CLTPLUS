@@ -9,7 +9,7 @@ if strcmpi(micro_cal, 'on')
         mat.(string(lamina_name)).mprop.G12, ...
         mat.(string(lamina_name)).mprop.v12] = micro_mech_cal(micro, micro_method);
 else
-    lamina_name = "mat2";
+    lamina_name = "lam2";
     % lamina name
     % N.B. with underscore and no space / hyphen
     mat.(string(lamina_name)).mprop.E11 = 145e3; % longitudinal Young's modulus
@@ -26,9 +26,10 @@ mat.(string(lamina_name)).mprop.Yc = -200; % transverse compression strength
 mat.(string(lamina_name)).mprop.S = 120; % shear strength
 
 % ply thickness and angle
-mat.(string(lamina_name)).ply.t_ply = 0.16; % ply thickness (in case of same thickness for plies) [mm]
-mat.(string(lamina_name)).ply.t = ones(1, 10) * mat.(string(lamina_name)).ply.t_ply;
-mat.(string(lamina_name)).ply.theta = [45, -45, 90, 0, 0, 0 , 0, 90, -45, 45];
+mat.(string(lamina_name)).ply.t_ply = 0.15; % ply thickness (in case of same thickness for plies) [mm]
+mat.(string(lamina_name)).ply.theta = [90, 90, 90, 90, 0, 0, 0, 0, 0, 0, 0, 0, 90, 90, 90, 90];
+n_layers = length(mat.(string(lamina_name)).ply.theta);
+mat.(string(lamina_name)).ply.t = ones(1, n_layers) * mat.(string(lamina_name)).ply.t_ply;
 mat.(string(lamina_name)).id = n;
 
 % loading
