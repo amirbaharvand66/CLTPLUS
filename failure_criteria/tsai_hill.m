@@ -1,4 +1,4 @@
-function [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
+function [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id)
 % Tsai_Hill failure criterion
 
 % INPUT(S)
@@ -14,18 +14,11 @@ function [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-if strcmpi(all_fc, 'on') == 1
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('All Failure Criteria - Laminate %d', id))
-    hold on
-    tsai_hill_envelope(Xt, Xc, Yt, Yc, S, all_fc)
-else
-    figure()
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('Tsai-Hill Failure Criterion - Laminate %d', id))
-    hold on
-    tsai_hill_envelope(Xt, Xc, Yt, Yc, S, all_fc)
-end
+figure()
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', sprintf('Tsai-Hill Failure Criterion - Laminate %d', id))
+hold on
+tsai_hill_envelope(Xt, Xc, Yt, Yc, S)
 
 
 ply_num = zeros(length(theta) * 2, 1);
@@ -38,12 +31,12 @@ for ii = 1:size(ls, 1)
     s11 = ls(ii, 1);
     s22 = ls(ii, 2);
     s12 = ls(ii, 3);
-    
+
     s__x = ( (sign(s11) + 1) / 2 ) * Xt + ( (sign(s11) - 1) / 2 ) * Xc;
     s__y = ( (sign(s22) + 1) / 2 ) * Yt + ( (sign(s22) - 1) / 2 ) * Yc;
-    
+
     fidx = s11^2 / s__x^2 + s22^2 / s__y^2 - (s11 * s22) / s__x^2 + s12^2 / S^2; % failure index
-    
+
     % no failure at top surface
     if (fidx <= 1) && ( mod(ii, 2) == 1 )
         flag = 0;
@@ -65,14 +58,14 @@ for ii = 1:size(ls, 1)
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','r', 'MarkerFaceColor','r');
         text(s11, s22, s12, sprintf('$%d(%d^-)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
     end
-    
-        % collecting necessary outputs for failure reporting
+
+    % collecting necessary outputs for failure reporting
     % collecting ply number
     ply_num(ii) = ceil(ii / 2);
-    
+
     % collecting flag values
     flag_vec(ii) = flag;
-    
+
     % collecting failure index
     fidx_vec(ii) = fidx;
 end

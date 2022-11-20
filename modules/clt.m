@@ -38,7 +38,7 @@ default_save_output = 'off'; % save output workspace
 valid_load = {'nm', 'ek'};
 valid_global_strsstrn = {'on', 'off'};
 valid_local_strsstrn = {'on', 'off'}; 
-valid_failure = {'off', 'mstrs', 'mstrn', 'TH','PHR', 'all'};
+valid_failure = {'off', 'mstrs', 'mstrn', 'TH','PHR'};
 valid_report = {'on', 'off'}; 
 valid_save_output = {'on', 'off'}; 
 % parser checker
@@ -209,8 +209,7 @@ if strcmpi(failure, 'off')
     fail_rpt = {};
 elseif strcmpi(failure, 'mstrs')
     % Maximum stress failure criterion
-    all_fc = 'off';
-    [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
+    [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id);
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
@@ -218,8 +217,7 @@ elseif strcmpi(failure, 'mstrs')
     legend(lgd, {'Maximum stress', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
 elseif strcmpi(failure, 'mstrn')
     % Maximum strain failure criterion
-    all_fc = 'off';
-    [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
+    [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id);
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
@@ -227,8 +225,7 @@ elseif strcmpi(failure, 'mstrn')
     legend(lgd, {'Maximum Stress', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
 elseif strcmpi(failure, 'TH')
     % Tsai_Hill failure criterion
-    all_fc = 'off';
-    [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
+    [fail_rpt] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id);
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
@@ -236,21 +233,12 @@ elseif strcmpi(failure, 'TH')
     legend(lgd, {'Tsai-Hill', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
 elseif strcmpi(failure, 'PHR')
     % Puck (Hashin-Rotem) failure criterion
-    all_fc = 'off';
-    [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
+    [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id);
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Puck', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmpi(failure, 'all')
-    % All failure criteria
-    all_fc = 'on';
-    [~] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
-    [~] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
-    [~] = tsai_hill(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
-    [~] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc);
-    fail_rpt = {};
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'k', 'LineWidth', 5);

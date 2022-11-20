@@ -1,4 +1,4 @@
-function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
+function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt, Xc, Yt, Yc, S, id)
 % maximum strain failure criterion
 
 % INPUT(S)
@@ -20,18 +20,11 @@ function [fail_rpt] = mstrn(theta, v12, v21, le, eXt, eXc, eYt, eYc, eXY, ls, Xt
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-if strcmpi(all_fc, 'on') == 1
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('All Failure Criteria - Laminate %d', id))
-    hold on
-    mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
-else
-    figure()
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('Maximum Strain Failure Criterion - Laminate %d', id))
-    hold on
-    mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
-end
+figure()
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', sprintf('Maximum Strain Failure Criterion - Laminate %d', id))
+hold on
+mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 
 ply_num = zeros(length(theta) * 2, 1);
 flag_vec = zeros(length(theta) * 2, 1);
@@ -44,16 +37,16 @@ for ii = 1:size(le, 1)
     s11 = ls(ii, 1);
     s22 = ls(ii, 2);
     s12 = ls(ii, 3);
-    
+
     e11 = le(ii, 1);
     e22 = le(ii, 2);
     e12 = le(ii, 3);
-    
+
     e__x = ( (sign(e11) + 1) / 2 ) * eXt + ( (sign(e11) - 1) / 2 ) * eXc;
     e__y = ( (sign(e22) + 1) / 2 ) * eYt + ( (sign(e22) - 1) / 2 ) * eYc;
-    
+
     fidx = max( [e11 / eXt, e11 / eXc, e22 / eYt, e22 / eYc, e12 / eXY] ); % failure index
-    
+
     % no failure at top surface
     if ( abs(e11) < e__x ) && ( abs(e22) < e__y ) && (abs(e12) < eXY) && ( mod(ii, 2) == 1 )
         ft = '';
@@ -79,17 +72,17 @@ for ii = 1:size(le, 1)
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','r', 'MarkerFaceColor','r');
         text(s11, s22, s12, sprintf('$%d(%d^-)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
     end
-    
+
     % collecting necessary outputs for failure reporting
     % collecting ply number
     ply_num(ii) = ceil(ii / 2);
-    
+
     % collecting flag values
     flag_vec(ii) = flag;
-    
+
     % collecting failure type
     ft_vec{ii} = ft;
-    
+
     % collecting failure index
     fidx_vec(ii) = fidx;
 end

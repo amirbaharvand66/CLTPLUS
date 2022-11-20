@@ -1,4 +1,4 @@
-function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
+function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id)
 % maximum stress failure criterion
 
 % INPUT(S)
@@ -14,18 +14,11 @@ function [fail_rpt] = mstrs(theta, ls, Xt, Xc, Yt, Yc, S, id, all_fc)
 % originally coded by Amir Baharvand (08-20)
 
 % plot envelope
-if strcmpi(all_fc, 'on') == 1
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('All Failure Criteria - Laminate %d', id))
-    hold on
-    mstrs_envelope(Xt, Xc, Yt, Yc, S, all_fc)
-else
-    figure()
-    set(gcf, 'NumberTitle', 'off')
-    set(gcf, 'Name', sprintf('Maximum Stress Failure Criterion - Laminate %d', id))
-    hold on
-    mstrs_envelope(Xt, Xc, Yt, Yc, S, all_fc)
-end
+figure()
+set(gcf, 'NumberTitle', 'off')
+set(gcf, 'Name', sprintf('Maximum Stress Failure Criterion - Laminate %d', id))
+hold on
+mstrs_envelope(Xt, Xc, Yt, Yc, S)
 
 ply_num = zeros(length(theta) * 2, 1);
 flag_vec = zeros(length(theta) * 2, 1);
@@ -38,12 +31,12 @@ for ii = 1:size(ls, 1)
     s11 = ls(ii, 1);
     s22 = ls(ii, 2);
     s12 = ls(ii, 3);
-    
+
     s__x = ( (sign(s11) + 1) / 2 ) * Xt + ( (sign(s11) - 1) / 2 ) * -Xc;
     s__y = ( (sign(s22) + 1) / 2 ) * Yt + ( (sign(s22) - 1) / 2 ) * -Yc;
-    
+
     fidx = max( [s11 / Xt, s11 / Xc, s22 / Yt, s22 / Yc, s12 / S] ); % failure index
-    
+
     % no failure at top surface
     if ( abs(s11) < s__x ) && ( abs(s22) < s__y ) && (abs(s12) < S) && ( mod(ii, 2) == 1 )
         ft = '';
@@ -69,17 +62,17 @@ for ii = 1:size(ls, 1)
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','r', 'MarkerFaceColor','r');
         text(s11, s22, s12, sprintf('$%d(%d^-)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
     end
-    
+
     % collecting necessary outputs for failure reporting
     % collecting ply number
     ply_num(ii) = ceil(ii / 2);
-    
+
     % collecting flag values
     flag_vec(ii) = flag;
-    
+
     % collecting failure type
     ft_vec{ii} = ft;
-    
+
     % collecting failure index
     fidx_vec(ii) = fidx;
 end

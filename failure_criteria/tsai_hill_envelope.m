@@ -1,4 +1,4 @@
-function tsai_hill_envelope(Xt, Xc, Yt, Yc, S, all_fc)
+function tsai_hill_envelope(Xt, Xc, Yt, Yc, S)
 % plot Tsai_Hill failure envelope
 
 % INPUT(S)
@@ -20,15 +20,10 @@ sx = ( (sign(x) + 1) / 2 ) .* Xt + ( (sign(x) - 1) / 2 ) .* Xc;
 sy = ( (sign(y) + 1) / 2 ) .* Yt + ( (sign(y) - 1) / 2 ) .* Yc;
 txy = real(sqrt((1 - (x.^2 ./ sx.^2 + y.^2 ./ sy.^2 - (x .* y) ./ sx.^2)) * S^2));
 
-if strcmpi(all_fc, 'on') == 1
-    mesh(x, y, txy, 'FaceAlpha', 0.1, 'FaceColor','m', 'FaceAlpha',0.1, 'EdgeColor','none')
-    hold on
-    mesh(x, y, -txy, 'FaceAlpha', 0.1, 'FaceColor','m', 'FaceAlpha',0.1, 'EdgeColor','none')
-else
-    mesh(x, y, txy, 'FaceAlpha', 0.1, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
-    hold on
-    mesh(x, y, -txy, 'FaceAlpha', 0.1, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
-end
+mesh(x, y, txy, 'FaceAlpha', 0.1, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
+hold on
+mesh(x, y, -txy, 'FaceAlpha', 0.1, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
+
 xlabel('$\sigma_{11}$','Interpreter','latex', 'FontSize', 20)
 ylabel('$\sigma_{22}$','Interpreter','latex', 'FontSize', 20)
 zlabel('$\sigma_{12}$','Interpreter','latex', 'FontSize', 20)
