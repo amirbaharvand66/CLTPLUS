@@ -7,7 +7,7 @@ set(groot, 'defaultAxesTickLabelInterpreter','latex'); set(groot, 'defaultLegend
 addpath(genpath('./preamble'));
 addpath(genpath('./abd'));
 addpath(genpath('./failure_criteria'));
-addpath(genpath('./mat_prop'));
+addpath(genpath('./lam_prop'));
 addpath(genpath('./micro_mech_prop'));
 addpath(genpath('./moduli'));
 addpath(genpath('./plot_functions'));
