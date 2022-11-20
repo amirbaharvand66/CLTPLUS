@@ -1,14 +1,24 @@
-n = 2; % for laminate id
+n = 1; % for laminate id
 
-% lamina name
-% N.B. with underscore and no space / hyphen
-lamina_name = "mat2";
+% lamina mechanical properties
+if strcmpi(micro_cal, 'on')
+    fiber_resin_prop;
+    [mat.(string(lamina_name)).mprop.rho, ...
+        mat.(string(lamina_name)).mprop.E11 ,...
+        mat.(string(lamina_name)).mprop.E22, ...
+        mat.(string(lamina_name)).mprop.G12, ...
+        mat.(string(lamina_name)).mprop.v12] = micro_mech_cal(micro, micro_method);
+else
+    lamina_name = "mat2";
+    % lamina name
+    % N.B. with underscore and no space / hyphen
+    mat.(string(lamina_name)).mprop.E11 = 145e3; % longitudinal Young's modulus
+    mat.(string(lamina_name)).mprop.E22 = 7e3; % transverse Young's modulus
+    mat.(string(lamina_name)).mprop.G12 = 3.5e3; % in-plane shear modulus
+    mat.(string(lamina_name)).mprop.v12 = 0.34; % in-plane Poisson's ratio
+end
 
-% mechanical properties
-mat.(string(lamina_name)).mprop.E11 = 145e3; % longitudinal Young's modulus
-mat.(string(lamina_name)).mprop.E22 = 7e3; % transverse Young's modulus
-mat.(string(lamina_name)).mprop.G12 = 3.5e3; % in-plane shear modulus
-mat.(string(lamina_name)).mprop.v12 = 0.34; % in-plane Poisson's ratio
+% lamina strength
 mat.(string(lamina_name)).mprop.Xt = 2200; % longitudinal tensite strength
 mat.(string(lamina_name)).mprop.Xc = -1850; % longitudinal compression strength
 mat.(string(lamina_name)).mprop.Yt = 55; % transverse tensite strength
