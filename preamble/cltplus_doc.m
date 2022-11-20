@@ -1,8 +1,18 @@
 function cltplus_doc()
-%                                           CLTPLUS
-% A Tool for th Classical Laminate Plate Theory for Composites
-% ----------------------------------------------------------------
-% Start from "mat_prop" folder by defining ply mechanical properties.
+%                                                           CLTPLUS
+% A Tool for the predicting First-Ply Failure (FPF) of laminated composite based on 
+%                       Classical Laminate Plate Theory for Composites
+% ----------------------------------------------------------------------------------------
+% Start from either 
+% 1. By inserting fiber/resin properties available in "/micro_mech_prop/fiber_resin_prop
+% and selecting 
+% 1.1 'ROM' rule of mixture (micro_cal = 'on')
+% 1.2 'HT' Halpin-Tsai (micro = 'on')
+% or
+% 2. Turning off (micro_cal = 'off') and inserting lamina properties directly in "mat_prop" folder 
+% 
+% ------------------------------------------clt Module--------------------------------------------
+% 
 % The available options are
 % 'load' = ‘nm’ force-moment
 %             ‘ek’ strain-survature
@@ -15,6 +25,10 @@ function cltplus_doc()
 %                  'mstrn' maximum strain failure criterion
 %                  'TH' Tsai-Hill stress failure criterion
 %                  'PHR' Puck (Hashin-Rotem) failure criterion
-%                  'all' compare all failure criteria
 % report 'on' / 'off'
 % save_output 'on' / 'off'
+%
+% --------------------------------------lekhnitskii Module----------------------------------------
+% 
+% type in "help lekhnitskii_doc" in command window for documentation, assumptions
+% and application of the present code
