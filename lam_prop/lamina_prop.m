@@ -19,24 +19,24 @@ else
 end
 
 % lamina strength
-mat.(string(lamina_name)).mprop.Xt = 2200; % longitudinal tensite strength
-mat.(string(lamina_name)).mprop.Xc = -1850; % longitudinal compression strength
-mat.(string(lamina_name)).mprop.Yt = 55; % transverse tensite strength
-mat.(string(lamina_name)).mprop.Yc = -200; % transverse compression strength
-mat.(string(lamina_name)).mprop.S = 120; % shear strength
+mat.(string(lamina_name)).mprop.Xt = 1500; % longitudinal tensite strength
+mat.(string(lamina_name)).mprop.Xc = 1000; % longitudinal compression strength
+mat.(string(lamina_name)).mprop.Yt = 180; % transverse tensite strength
+mat.(string(lamina_name)).mprop.Yc = 240; % transverse compression strength
+mat.(string(lamina_name)).mprop.S = 150; % shear strength
 
 % ply thickness and angle
-mat.(string(lamina_name)).ply.t_ply = 0.15; % ply thickness (in case of same thickness for plies) [mm]
-mat.(string(lamina_name)).ply.theta = [90, 90, 90, 90, 0, 0, 0, 0, 0, 0, 0, 0, 90, 90, 90, 90];
+mat.(string(lamina_name)).ply.t_ply = 0.125; % ply thickness (in case of same thickness for plies) [mm]
+mat.(string(lamina_name)).ply.theta = [45, -45, 0, 90, 0, 0, 90, 0, -45, 45];
 n_layers = length(mat.(string(lamina_name)).ply.theta);
 mat.(string(lamina_name)).ply.t = ones(1, n_layers) * mat.(string(lamina_name)).ply.t_ply;
 mat.(string(lamina_name)).id = n;
 
 % loading
-mat.(string(lamina_name)).load.N = [1400; 42; 0]; % e.g. N/mm
+mat.(string(lamina_name)).load.N = [-200; 200; -20]; % e.g. N/mm
 mat.(string(lamina_name)).load.m = [0; 0; 0]; % e.g. N.mm / mm
 mat.(string(lamina_name)).load.e0 = [0; 0; 0]; % e.g. mm / mm
-mat.(string(lamina_name)).load.k0 = [3.3e-3; 0; 0]; % e.g. 1 / mm
+mat.(string(lamina_name)).load.k0 = [0; 0; 0]; % e.g. 1 / mm
 
 % lekhnitskii solution parameters
 % load at infinity
