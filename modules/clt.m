@@ -37,10 +37,10 @@ default_save_output = 'off'; % save output workspace
 % paerse valid option(s)
 valid_load = {'nm', 'ek'};
 valid_global_strsstrn = {'on', 'off'};
-valid_local_strsstrn = {'on', 'off'}; 
-valid_failure = {'off', 'mstrs', 'mstrn', 'TH','PHR'};
-valid_report = {'on', 'off'}; 
-valid_save_output = {'on', 'off'}; 
+valid_local_strsstrn = {'on', 'off'};
+valid_failure = {'off', 'mstrs', 'mstrn', 'TH', 'HR'};
+valid_report = {'on', 'off'};
+valid_save_output = {'on', 'off'};
 % parser checker
 check_load = @(x) any(validatestring(x, valid_load));
 check_global_strsstrn = @(x) any(validatestring(x, valid_global_strsstrn));
@@ -120,7 +120,7 @@ elseif strcmpi(p.Results.load, 'nm')
 end
 
 
-% creating a copy of z for calculating global and local stress-strain 
+% creating a copy of z for calculating global and local stress-strain
 zc = zeros(1, 2 * length(t)); % copy of thickness coordinates (z)
 zc(1) = -h / 2;
 zc(end) = h / 2;
@@ -155,14 +155,14 @@ gs = zeros(2 * length(t), 3);
 
 for ii = 1:length(theta)
     M = transformation_matrix_plane_stress(theta(ii)); % transformation matrxi (M)
-    
+
     % transformed reduced stiffness matrix
     q = M \ Q * R * M / R; % inv(M) * Q * R * M * inv(R)
-    
+
     % calculating global stress(gs) for each ply
     gs(2 * ii - 1, :) = q * ge(2 * ii - 1, :)';
     gs(2 * ii, :) = q * ge(2 * ii, :)';
-    
+
 end
 
 
@@ -172,11 +172,11 @@ le = zeros(2 * length(t), 3);
 
 for ii = 1:length(theta)
     M = transformation_matrix_plane_stress(theta(ii)); % transformation matrxi (M)
-    
+
     % calculating local strains(le) for each ply
     le(2 * ii -1, :) = R * M / R * ge(2 * ii - 1, :)';
     le(2 * ii, :) = R * M / R * ge(2 * ii, :)';
-    
+
 end
 
 
@@ -186,7 +186,7 @@ ls = zeros(2 * length(t), 3);
 
 for ii = 1:length(theta)
     M = transformation_matrix_plane_stress(theta(ii));
-    
+
     % calculating local stress(ls) for each ply
     ls(2 * ii - 1, :) = M * gs(2 * ii - 1, :)';
     ls(2 * ii, :) = M * gs(2 * ii, :)';
@@ -231,24 +231,15 @@ elseif strcmpi(failure, 'TH')
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
     legend(lgd, {'Tsai-Hill', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-elseif strcmpi(failure, 'PHR')
-    % Puck (Hashin-Rotem) failure criterion
-    [fail_rpt] = puck(theta, ls, Xt, Xc, Yt, Yc, S, id);
+elseif strcmpi(failure, 'HR')
+    % Hashin-Rotem failure criterion
+    [fail_rpt] = hashin(theta, ls, Xt, Xc, Yt, Yc, S, id);
     % creating legend
     lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
     lgd(2) = plot(nan, nan, 'g', 'LineWidth', 5);
     lgd(3) = plot(nan, nan, 'r', 'LineWidth', 5);
-    legend(lgd, {'Puck', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
-    % creating legend
-    lgd(1) = plot(nan, nan, 'b', 'LineWidth', 5);
-    lgd(2) = plot(nan, nan, 'k', 'LineWidth', 5);
-    lgd(3) = plot(nan, nan, 'm', 'LineWidth', 5);
-    lgd(4) = plot(nan, nan, 'c', 'LineWidth', 5);
-    lgd(5) = plot(nan, nan, 'g', 'LineWidth', 5);
-    lgd(6) = plot(nan, nan, 'r', 'LineWidth', 5);
-    legend(lgd, {'Maximum stress', 'Maximum Stress', 'Tsai-Hill', 'Puck', 'Unfailed', 'Failed'}...
-        , 'Interpreter', 'latex', 'FontSize', 15)
-    
+    legend(lgd, {'Hashin-Rotem', 'Unfailed', 'Failed'}, 'Interpreter', 'latex', 'FontSize', 15)
+
 else
     fprintf('Select from one of the options: ')
     fprintf('%s ', valid_failure{:})
@@ -274,8 +265,8 @@ laminate.abd.Q = Q;                            laminate.prop.v21 = v21;
 laminate.abd.a = a;                              laminate.abd.b = b;
 laminate.abd.bTranspose = c;             laminate.abd.d = d;
 laminate.prop.mbrn = mbrn;              laminate.prop.mbrn = bnd;
-laminate.ply.z = z;                               laminate.ply.zc = zc;                                     laminate.ply.h = h;  
-laminate.strsstrn.me0k0 = me0k0;      
+laminate.ply.z = z;                               laminate.ply.zc = zc;                                     laminate.ply.h = h;
+laminate.strsstrn.me0k0 = me0k0;
 laminate.strsstrn.gblstrn = ge;            laminate.strsstrn.lclstrn = ls;
 laminate.strsstrn.gblstrs = gs;             laminate.strsstrn.lclstrs = ls;
 if strcmp(failure, 'off') == 0
