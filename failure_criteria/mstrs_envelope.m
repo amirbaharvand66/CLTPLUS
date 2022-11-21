@@ -13,8 +13,8 @@ function mstrs_envelope(Xt, Xc, Yt, Yc, S)
 
 n = 2; % number of contours
 
-x = linspace(Xc, Xt, n);
-y = linspace(Yc, Yt, n);
+x = linspace(-Xc, Xt, n);
+y = linspace(-Yc, Yt, n);
 [x, y] = meshgrid(x, y);
 
 z = S * ones(size(x));
@@ -22,20 +22,20 @@ mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
 z = S * ones(size(x));
 mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
 
-x = linspace(Xc, Xt, n);
+x = linspace(-Xc, Xt, n);
 z = linspace(-S, S, n);
 [x, z] = meshgrid(x, z);
 
-y = Yc * ones(size(x));
+y = -Yc * ones(size(x));
 mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
 y = Yt * ones(size(x));
 mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
 
-y = linspace(Yc, Yt, n);
+y = linspace(-Yc, Yt, n);
 z = linspace(-S, S, n);
 [y, z] = meshgrid(y, z);
 
-x = Xc * ones(size(y));
+x = -Xc * ones(size(y));
 mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
 x = Xt * ones(size(y));
 mesh(x, y, z, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
