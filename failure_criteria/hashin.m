@@ -19,7 +19,7 @@ figure()
 set(gcf, 'NumberTitle', 'off')
 set(gcf, 'Name', sprintf('Hashin-Rotem Failure Criterion - Laminate %d \n N.B. Alpha parameter is set to zero.', id))
 hold on
-puck_envelope(Xt, Xc, Yt, Yc, S)
+hashin_envelope(Xt, Xc, Yt, Yc, S)
 
 ply_num = zeros(length(theta) * 2, 1);
 flag_vec = zeros(length(theta) * 2, 1);
