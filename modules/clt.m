@@ -264,7 +264,7 @@ laminate.abd.A = A;                             laminate.abd.B = B;             
 laminate.abd.Q = Q;                            laminate.prop.v21 = v21;
 laminate.abd.a = a;                              laminate.abd.b = b;
 laminate.abd.bTranspose = c;             laminate.abd.d = d;
-laminate.prop.mbrn = mbrn;              laminate.prop.mbrn = bnd;
+laminate.prop.mbrn = mbrn;              laminate.prop.bnd = bnd;
 laminate.ply.z = z;                               laminate.ply.zc = zc;                                     laminate.ply.h = h;
 laminate.strsstrn.me0k0 = me0k0;
 laminate.strsstrn.gblstrn = ge;            laminate.strsstrn.lclstrn = ls;
