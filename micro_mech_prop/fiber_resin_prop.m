@@ -5,7 +5,8 @@ micro.fiber.El = 235e3; % fiber longitudinal modulus [MPa]
 micro.fiber.Et = 15e3; % fiber transverse modulus [MPa]
 micro.fiber.G = 27e3; % fiber in-plane shear modulus [MPa]
 micro.fiber.nu = 0.2; % fiber in-plane Poisson's ratio
-micro.fiber.Vf = 0.6; % fiber volume fraction
+micro.fiber.Vf = 61.25; % fiber volume fraction [%]
+micro.fiber.Vf = micro.fiber.Vf / 100; 
 
 % resin micro-mechanical properties
 micro.resin.name = "35016 Epoxy"; % N.B. with underscore and no space / hyphen
