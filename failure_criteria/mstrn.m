@@ -45,7 +45,7 @@ for ii = 1:size(le, 1)
     e__x = ( (sign(e11) + 1) / 2 ) * eXt + ( (sign(e11) - 1) / 2 ) * eXc;
     e__y = ( (sign(e22) + 1) / 2 ) * eYt + ( (sign(e22) - 1) / 2 ) * eYc;
 
-    fidx = max( [e11 / eXt, e11 / eXc, e22 / eYt, e22 / eYc, e12 / eXY] ); % failure index
+    fidx = max( abs([e11 / eXt, e11 / eXc, e22 / eYt, e22 / eYc, e12 / eXY]) ); % failure index
 
     % no failure at top surface
     if ( abs(e11) < e__x ) && ( abs(e22) < e__y ) && (abs(e12) < eXY) && ( mod(ii, 2) == 1 )
