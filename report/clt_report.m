@@ -16,7 +16,7 @@ function clt_report(id, mat, lam, ABD, abd, mbrn, bnd, loading, me0k0, zc, ge, g
 
 
 % turn off warning of added specified worksheet
-warning( 'off', 'MATLAB:xlswrite:AddSheet' );
+warning( 'off', 'MATLAB:writematrix:AddSheet' );
 
 
 % creating report file name
@@ -30,23 +30,23 @@ delete(rpt_file_name)
 
 
 % ABD
-xlswrite(rpt_file_name, ['A' 'B'; 'B' 'D'], sheet, 'A3:B4');
-xlswrite(rpt_file_name, ABD, sheet, 'C1:H6');
+writematrix(['A' 'B'; 'B' 'D'], rpt_file_name, 'Sheet', sheet, 'Range', 'A3:B4');
+writematrix(ABD, rpt_file_name, 'Sheet', sheet, 'Range', 'C1:H6');
 
 
 %abd
-xlswrite(rpt_file_name, ['a' 'b'; 'b' 'd'], sheet, 'A10:B11');
-xlswrite(rpt_file_name, abd, sheet, 'C8:H13');
+writematrix(['a' 'b'; 'b' 'd'], rpt_file_name, 'Sheet', sheet, 'Range',  'A10:B11');
+writematrix(abd, rpt_file_name, 'Sheet', sheet, 'Range', 'C8:H13');
 
 
 % laminate membrane stiffnesses
-xlswrite(rpt_file_name, cellstr('Laminate membrane stiffnesses'), sheet, 'A15:A15');
-xlswrite(rpt_file_name, mbrn, sheet, 'C15');
+writecell(cellstr('Laminate membrane stiffnesses'), rpt_file_name, 'Sheet', sheet, 'Range', 'A15:A15');
+writecell(mbrn, rpt_file_name, 'Sheet', sheet, 'Range', 'C15');
 
 
 % laminate bending stiffnesses
-xlswrite(rpt_file_name, cellstr('Laminate bending stiffnesses'), sheet, 'A18:A18');
-xlswrite(rpt_file_name, bnd, sheet, 'C18:G19');
+writecell(cellstr('Laminate bending stiffnesses'), rpt_file_name, 'Sheet', sheet, 'Range', 'A18:A18');
+writematrix(bnd, rpt_file_name, 'Sheet', sheet, 'Range', 'C18:G19');
 
 
 % mid-plane strain-curvature
@@ -57,29 +57,30 @@ N = mat.(lam{:}).load.N; % applied force
 m = mat.(lam{:}).load.m; % applied moment
 load_tag = {'Nx'; 'Ny'; 'Nxy'; 'Mx.'; 'My'; 'Mxy'};
 ek_tag = {'e0x.'; 'e0y.'; 'e0xy'; 'k0x.'; 'k0y'; 'k0xy'};
-xlswrite(rpt_file_name, cellstr('Applied load'), sheet, 'A21:A21');
-xlswrite(rpt_file_name, load_tag, sheet, 'A22:A27');
-xlswrite(rpt_file_name, ek_tag, sheet, 'C22:C27');
+writecell(cellstr('Applied load'), rpt_file_name, 'Sheet', sheet, 'Range', 'A21:A21');
+writecell(load_tag, rpt_file_name, 'Sheet', sheet, 'Range', 'A22:A27');
+writecell(ek_tag, rpt_file_name, 'Sheet', sheet, 'Range', 'C22:C27');
 if loading == 'ek'
     nm = ABD * [e0; k0];
-    xlswrite(rpt_file_name, nm, sheet, 'B22:B27');
-    xlswrite(rpt_file_name, [e0; k0], sheet, 'D22:D27');
+    writematrix(nm, rpt_file_name, 'Sheet', sheet, 'Range', 'B22:B27');
+    writematrix([e0; k0], rpt_file_name, 'Sheet', sheet, 'Range', 'D22:D27');
 elseif loading == 'nm'
-    xlswrite(rpt_file_name, [N; m], sheet, 'B22:B27');
-    xlswrite(rpt_file_name, me0k0, sheet, 'D22:D27');
+    writematrix([N; m], rpt_file_name, 'Sheet', sheet, 'Range', 'B22:B27');
+    writematrix(me0k0, rpt_file_name, 'Sheet', sheet, 'Range', 'D22:D27');
 end
 
 
 % 10-percent rule
 t = mat.(lam{:}).ply.t;
 theta = mat.(lam{:}).ply.theta;
-xlswrite(rpt_file_name, cellstr('10% rule'), sheet, 'A29:A29');
+writecell(cellstr('10% rule'), rpt_file_name, 'Sheet',  sheet, 'Range', 'A29:A29');
 [tag, zero_of_tot, p45_of_tot, m45_of_tot, ninty_of_tot] = ten_percent_rule(t, theta);
-xlswrite(rpt_file_name, tag, sheet, 'A30:A33');
-xlswrite(rpt_file_name, [zero_of_tot p45_of_tot m45_of_tot ninty_of_tot]', sheet, 'B30:B33');
+writecell(tag, rpt_file_name, 'Sheet', sheet, 'Range', 'A30:A33');
+writematrix([zero_of_tot p45_of_tot m45_of_tot ninty_of_tot]', rpt_file_name, 'Sheet', sheet, ...
+    'Range', 'B30:B33');
 % pop-up message for 10-percent rule in case of invasion
 if ( zero_of_tot + p45_of_tot + m45_of_tot + ninty_of_tot ) <= 10
-    xlswrite(rpt_file_name, cellstr(ten_p_msg), sheet, 'A34:A34');
+    writecell(cellstr(ten_p_msg), rpt_file_name, 'Sheet', sheet, 'Range', 'A34:A34');
 end
 
 
@@ -88,8 +89,9 @@ strsstrn_tag = {'Ply no.', 'Mat no.', 'Ply angle', 'Ply thk.', 'Ply crd.', 'Posi
                         'exx', 'eyy', 'exy', 'sxx', 'syy', 'sxy', ...
                         'e11', 'e22', 'e12', 's11', 's22', 's12', ...
                         'Status', 'Failure index', 'Safety factor', 'Failure type', 'Failure criterion'};
-xlswrite(rpt_file_name, cellstr('Global, local stress-strain and failure in each ply'), sheet, 'J36:J36');
-xlswrite(rpt_file_name, strsstrn_tag, sheet, 'A37');
+writecell(cellstr('Global, local stress-strain and failure in each ply'), rpt_file_name, 'Sheet', sheet, ...
+    'Range', 'J36:J36');
+writecell(strsstrn_tag, rpt_file_name, 'Sheet', sheet, 'Range', 'A37');
 ply_no = ceil( ( 1:length(t) * 2 )/ 2 );
 mat_no = id * ones(1, length(t) * 2);
 ply_angle = t(ceil((1:length(t  ) * 2) / 2));
@@ -107,13 +109,13 @@ elseif strcmpi(fail_crtrn, 'TH')
 elseif strcmpi(fail_crtrn, 'HR')
     fail_crtrn = repmat({'Hashin-Rotem'}, 1, length(t) * 2);
 end
-xlswrite(rpt_file_name, [ply_no' mat_no' ply_angle' ply_thk' zc'], sheet, 'A38');
-xlswrite(rpt_file_name, position, sheet, 'F38');
-xlswrite(rpt_file_name, [ge gs le ls], sheet, 'G38');
+writematrix([ply_no' mat_no' ply_angle' ply_thk' zc'], rpt_file_name, 'Sheet', sheet, 'Range', 'A38');
+writecell(position, rpt_file_name, 'Sheet', sheet, 'Range', 'F38');
+writematrix([ge gs le ls], rpt_file_name, 'Sheet', sheet, 'Range', 'G38');
 if strcmpi(fail_crtrn, 'off')
-    xlswrite(rpt_file_name, [fail_crtrn'], sheet, 'S38');
+    writecell([fail_crtrn'], rpt_file_name, 'Sheet', sheet, 'Range', 'S38');
 else
-    xlswrite(rpt_file_name, [fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_rpt(2:end, 7) ...
-        fail_crtrn'], sheet, 'S38');
+    writecell([fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_rpt(2:end, 7) ...
+        fail_crtrn'], rpt_file_name, 'Sheet', sheet, 'Range', 'S38');
 end
 
