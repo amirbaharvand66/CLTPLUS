@@ -87,7 +87,7 @@ end
 strsstrn_tag = {'Ply no.', 'Mat no.', 'Ply angle', 'Ply thk.', 'Ply crd.', 'Position', ...
                         'exx', 'eyy', 'exy', 'sxx', 'syy', 'sxy', ...
                         'e11', 'e22', 'e12', 's11', 's22', 's12', ...
-                        'Status', 'Failure index', 'Failure type', 'Failure criterion'};
+                        'Status', 'Failure index', 'Safety factor', 'Failure type', 'Failure criterion'};
 xlswrite(rpt_file_name, cellstr('Global, local stress-strain and failure in each ply'), sheet, 'J36:J36');
 xlswrite(rpt_file_name, strsstrn_tag, sheet, 'A37');
 ply_no = ceil( ( 1:length(t) * 2 )/ 2 );
@@ -104,8 +104,8 @@ elseif strcmpi(fail_crtrn, 'mstrn')
     fail_crtrn = repmat({'Maximum strain'}, 1, length(t) * 2);
 elseif strcmpi(fail_crtrn, 'TH')
     fail_crtrn = repmat({'Tsai-Hill'}, 1, length(t) * 2);
-elseif strcmpi(fail_crtrn, 'PHR')
-    fail_crtrn = repmat({'Puck'}, 1, length(t) * 2);
+elseif strcmpi(fail_crtrn, 'HR')
+    fail_crtrn = repmat({'Hashin-Rotem'}, 1, length(t) * 2);
 end
 xlswrite(rpt_file_name, [ply_no' mat_no' ply_angle' ply_thk' zc'], sheet, 'A38');
 xlswrite(rpt_file_name, position, sheet, 'F38');
@@ -113,6 +113,7 @@ xlswrite(rpt_file_name, [ge gs le ls], sheet, 'G38');
 if strcmpi(fail_crtrn, 'off')
     xlswrite(rpt_file_name, [fail_crtrn'], sheet, 'S38');
 else
-    xlswrite(rpt_file_name, [fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_crtrn'], sheet, 'S38');
+    xlswrite(rpt_file_name, [fail_rpt(2:end, 4) fail_rpt(2:end, 5) fail_rpt(2:end, 6) fail_rpt(2:end, 7) ...
+        fail_crtrn'], sheet, 'S38');
 end
 
