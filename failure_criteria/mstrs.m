@@ -35,22 +35,22 @@ for ii = 1:size(ls, 1)
     s__x = ( (sign(s11) + 1) / 2 ) * Xt + ( (sign(s11) - 1) / 2 ) * -Xc;
     s__y = ( (sign(s22) + 1) / 2 ) * Yt + ( (sign(s22) - 1) / 2 ) * -Yc;
 
-    fidx = max( [s11 / Xt, s11 / Xc, s22 / Yt, s22 / Yc, s12 / S] ); % failure index
+    fidx = max( abs([s11 / Xt, s11 / Xc, s22 / Yt, s22 / Yc, s12 / S]) ); % failure index
 
     % no failure at top surface
-    if ( abs(s11) < s__x ) && ( abs(s22) < s__y ) && (abs(s12) < S) && ( mod(ii, 2) == 1 )
+    if ( abs(s11) < abs(s__x) ) && ( abs(s22) < abs(s__y) ) && (abs(s12) < S) && ( mod(ii, 2) == 1 )
         ft = '';
         flag = 0;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
         text(s11, s22, s12, sprintf('$%d(%d^+)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
         % no failure at bottom surface
-    elseif ( abs(s11) < s__x ) && ( abs(s22) < s__y ) && (abs(s12) < S) && ( mod(ii, 2) == 0 )
+    elseif ( abs(s11) < abs(s__x) ) && ( abs(s22) < abs(s__y) ) && (abs(s12) < S) && ( mod(ii, 2) == 0 )
         ft = '';
         flag = 0;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
         text(s11, s22, s12, sprintf('$%d(%d^-)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
         % failure at top surface
-    elseif ( ( abs(s11) >= s__x ) || ( abs(s22) >= s__y ) || (abs(s12) >= S) ) && ( mod(ii, 2) == 1 )
+    elseif ( ( abs(s11) >= abs(s__x) ) || ( abs(s22) >= abs(s__y) ) || (abs(s12) >= S) ) && ( mod(ii, 2) == 1 )
         ft = failure_type('strs', 's', [s11, s22, s__x, s__y]);
         flag = 1;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','r', 'MarkerFaceColor','r');
