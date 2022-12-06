@@ -42,7 +42,7 @@ for ii = 1:size(ls, 1)
         % fiber failure at top surface
         if ((s11 / s__x)^2 >= 1)  && ( mod(ii, 2) == 1 )
             flag = 1;
-            if s__x > 0
+            if s11 > 0
                 ft = 'Fiber Tension';
             else
                 ft = 'Fiber Compression';
@@ -52,7 +52,7 @@ for ii = 1:size(ls, 1)
             % fiber failure at bottom surface
         elseif ((s11 / s__x)^2 >= 1) && ( mod(ii, 2) == 0 )
             flag = 1;
-            if s__x > 0
+            if s11 > 0
                 ft = 'Fiber Tension';
             else
                 ft = 'Fiber Compression';
@@ -62,9 +62,9 @@ for ii = 1:size(ls, 1)
             % no failure at top surface
         elseif ( mod(ii, 2) == 1 )
             flag = 0;
-            if s__x > 0
+            if s11 > 0
                 ft = 'Fiber Tension';
-            elseif s__x < 0
+            else
                 ft = 'Fiber Compression';
             end
             scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
@@ -72,9 +72,9 @@ for ii = 1:size(ls, 1)
             % no failure at bottom surface
         elseif ( mod(ii, 2) == 0 )
             flag = 0;
-            if s__x > 0
+            if s11 > 0
                 ft = 'Fiber Tension';
-            elseif s__x < 0
+            else
                 ft = 'Fiber Compression';
             end
             scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
@@ -84,7 +84,7 @@ for ii = 1:size(ls, 1)
         % matrix failure at top surface
         if (mfail >= 1) && ( mod(ii, 2) == 1 )
             flag = 1;
-            if s__y > 0
+            if s22 > 0
                 ft = 'Matrix Tension';
             else
                 ft = 'Matrix Compression';
@@ -94,7 +94,7 @@ for ii = 1:size(ls, 1)
             % matrix failure at bottom surface
         elseif (mfail >= 1) && ( mod(ii, 2) == 0 )
             flag = 1;
-            if s__y > 0
+            if s22 > 0
                 ft = 'Matrix Tension';
             else
                 ft = 'Matrix Compression';
@@ -104,9 +104,9 @@ for ii = 1:size(ls, 1)
             % no failure at top surface
         elseif ( mod(ii, 2) == 1 )
             flag = 0;
-            if s__y > 0
+            if s22 > 0
                 ft = 'Matrix Tension';
-            elseif s__y < 0
+            else
                 ft = 'Matrix Compression';
             end
             scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
@@ -114,9 +114,9 @@ for ii = 1:size(ls, 1)
             % no failure at bottom surface
         elseif ( mod(ii, 2) == 0 )
             flag = 0;
-            if s__y > 0
+            if s22 > 0
                 ft = 'Matrix Tension';
-            elseif s__y < 0
+            else
                 ft = 'Matrix Compression';
             end
             scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
