@@ -25,6 +25,7 @@ ply_num = zeros(length(theta) * 2, 1);
 flag_vec = zeros(length(theta) * 2, 1);
 theta_c = theta(ceil((1:length(theta) * 2) / 2))';
 fidx_vec = zeros(length(theta) * 2, 1);
+sf_vec = zeros(length(theta) * 2, 1);
 position = repmat({'top surface'; 'bottom surface'}, length(theta), 1);
 
 for ii = 1:size(ls, 1)
@@ -36,6 +37,7 @@ for ii = 1:size(ls, 1)
     s__y = ( (sign(s22) + 1) / 2 ) * Yt + ( (sign(s22) - 1) / 2 ) * Yc;
 
     fidx = s11^2 / s__x^2 + s22^2 / s__y^2 - (s11 * s22) / s__x^2 + s12^2 / S^2; % failure index
+    sf = sqrt(1/fidx); % safety factor
 
     % no failure at top surface
     if (fidx <= 1) && ( mod(ii, 2) == 1 )
@@ -68,6 +70,9 @@ for ii = 1:size(ls, 1)
 
     % collecting failure index
     fidx_vec(ii) = fidx;
+
+    % collecting safety factor
+    sf_vec(ii) = sf;
 end
 
 % in case of failure of either top or bottom surface the whole ply should
@@ -85,9 +90,10 @@ ply_num = num2cell(ply_num);
 flag_vec = num2cell(flag_vec);
 theta_c = num2cell(theta_c);
 fidx_vec = num2cell(fidx_vec);
+sf_vec = num2cell(sf_vec);
 ft_vec = repmat({'NA'}, length(theta) * 2, 1);
-fail_tag = {'Ply no.', 'Ply angle', 'Position', 'Status', 'Failure index', 'Failure Type'};
-fail_rpt = [fail_tag; ply_num, theta_c, position, flag_vec ,fidx_vec, ft_vec]; % failure report
+fail_tag = {'Ply no.', 'Ply angle', 'Position', 'Status', 'Failure index', 'Safety factor', 'Failure Type'};
+fail_rpt = [fail_tag; ply_num, theta_c, position, flag_vec ,fidx_vec, sf_vec, ft_vec]; % failure report
 
 
 % displaying failure report
@@ -95,13 +101,13 @@ fprintf('***********************************************************************
 fprintf('\t\t Tsai-Hill Failure Criterion - Laminate %d\n', id)
 fprintf('\t\t    FAILURE = 1     Without failure = 0\n')
 fprintf('**************************************************************************************\n')
-fprintf('Ply no. \t Ply angle \t Position \t\t Status \t Failure index \t Failure Type\n')
+fprintf('Ply no. \t Ply angle \t Position \t\t Status \t Failure index \t Safety factor \t Failure Type\n')
 
 for ii = 2:size(fail_rpt, 1)
     if mod(ii, 2) == 0
-        fprintf('%0.0f \t %d \t\t %s \t\t %d \t %2.3f \t\t %s\n', fail_rpt{ii, :})
+        fprintf('%0.0f \t %d \t\t %s \t\t %d \t %2.3f \t\t %3.2f \t\t %s\n', fail_rpt{ii, :})
     else
-        fprintf('%0.0f \t %d \t\t %s \t %d \t %2.3f \t\t %s\n', fail_rpt{ii, :})
+        fprintf('%0.0f \t %d \t\t %s \t %d \t %2.3f \t\t %3.2f \t\t %s\n', fail_rpt{ii, :})
     end
 end
 
