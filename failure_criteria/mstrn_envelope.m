@@ -14,16 +14,16 @@ function mstrn_envelope(v12, v21, Xt, Xc, Yt, Yc, S)
 n = 2; % number of contours
 
 % create the appropriate mesh 
-x = linspace(-Xc, Xt, n);
-y = linspace(-Yc, Yt, n);
+x = linspace(Xc, Xt, n);
+y = linspace(Yc, Yt, n);
 [Xt, Yt] = meshgrid(x, y);
 [Xc, Yc] = meshgrid(x, y);
 
 % bounds in maximum strain failure criterion
 F1t = Xt + v12 * Yt;
-F1c = -Xc - v12 * -Yc;
+F1c = Xc - v12 * -Yc;
 F2t = Yt + v21 * Xt;
-F2c = -Yc - v21 * -Xc;
+F2c = Yc - v21 * -Xc;
 
 % s11-s22 plane
 z = S * ones(size(Xt));

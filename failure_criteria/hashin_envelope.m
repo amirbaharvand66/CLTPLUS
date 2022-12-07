@@ -13,8 +13,8 @@ function hashin_envelope(Xt, Xc, Yt, Yc, S)
 
 n = 50; % number of contours
 
-x = linspace(-Xc, Xt, n);
-y = linspace(-Yc, Yt, n);
+x = linspace(Xc, Xt, n);
+y = linspace(Yc, Yt, n);
 [x, y] = meshgrid(x, y);
 % sx = ( (sign(x) + 1) / 2 ) .* Xt + ( (sign(x) - 1) / 2 ) .* Xc;
 sy = ( (sign(y) + 1) / 2 ) .* Yt + ( (sign(y) - 1) / 2 ) .* Yc;

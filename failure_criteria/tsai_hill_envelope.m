@@ -13,11 +13,11 @@ function tsai_hill_envelope(Xt, Xc, Yt, Yc, S)
 
 n = 50; % number of contours
 
-x = linspace(-Xc, Xt, n);
-y = linspace(-Yc, Yt, n);
+x = linspace(Xc, Xt, n);
+y = linspace(Yc, Yt, n);
 [x, y] = meshgrid(x, y);
-sx = ( (sign(x) + 1) / 2 ) .* Xt + ( (sign(x) - 1) / 2 ) .* -Xc;
-sy = ( (sign(y) + 1) / 2 ) .* Yt + ( (sign(y) - 1) / 2 ) .* -Yc;
+sx = ( (sign(x) + 1) / 2 ) .* Xt + ( (sign(x) - 1) / 2 ) .* Xc;
+sy = ( (sign(y) + 1) / 2 ) .* Yt + ( (sign(y) - 1) / 2 ) .* Yc;
 txy = real(sqrt((1 - (x.^2 ./ sx.^2 + y.^2 ./ sy.^2 - (x .* y) ./ sx.^2)) * S^2));
 
 mesh(x, y, txy, 'FaceAlpha', 0.1, 'FaceColor','b', 'FaceAlpha',0.1, 'EdgeColor','none')
