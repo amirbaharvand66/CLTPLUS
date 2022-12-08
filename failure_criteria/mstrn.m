@@ -50,19 +50,19 @@ for ii = 1:size(le, 1)
     sf = min(1 ./ fidx); % safety factor
 
     % no failure at top surface
-    if ( abs(e11) < abs(e__x) ) && ( abs(e22) < abs(e__y) ) && (abs(e12) < eXY) && ( mod(ii, 2) == 1 )
+    if ( abs(e11) < e__x ) && ( abs(e22) < e__y ) && (abs(e12) < eXY) && ( mod(ii, 2) == 1 )
         ft = '';
         flag = 0;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
         text(s11, s22, s12, sprintf('$%d(%d^+)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
         % no failure at bottom surface
-    elseif ( abs(e11) < abs(e__x) ) && ( abs(e22) < abs(e__y) ) && (abs(e12) < eXY) && ( mod(ii, 2) == 0 )
+    elseif ( abs(e11) < e__x ) && ( abs(e22) < e__y ) && (abs(e12) < eXY) && ( mod(ii, 2) == 0 )
         ft = '';
         flag = 0;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','g', 'MarkerFaceColor','g');
         text(s11, s22, s12, sprintf('$%d(%d^-)$', ceil(ii / 2), theta(ceil(ii / 2))),'Interpreter','latex');
         % failure at top surface
-    elseif ( ( abs(e11) >= abs(e__x) ) || ( abs(e22) >= abs(e__y) ) || (abs(e12) >= eXY) ) && ( mod(ii, 2) == 1 )
+    elseif ( ( abs(e11) >= e__x ) || ( abs(e22) >= e__y ) || (abs(e12) >= eXY) ) && ( mod(ii, 2) == 1 )
         ft = failure_type('strn', 'e', [e11, e22, e__x, e__y]);
         flag = 1;
         scatter3(s11, s22, s12, 'o', 'MarkerEdgeColor','r', 'MarkerFaceColor','r');
