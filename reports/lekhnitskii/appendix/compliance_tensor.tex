@@ -1,0 +1,59 @@
+\section{Components of the Compliance Tensor} \label{app:compliance_mat}
+The compliance tensor for a general laminate can be calculated from the tensor transformation rule. As the compliance is a fourth-order tensor, the compliance tensor in the transformed coordinate, $\bm{S^{'}}$, is
+
+\begin{equation*}
+    S^{'}_{ijkl} = Q_{pi} Q_{qj} Q_{rk} Q_{sl} S_{pqrs}
+\end{equation*}
+
+where $Q$ is the proper orthogonal tensor .The compliance tensor components become \cite{Kassapoglou2015}
+
+\begin{flalign}
+    & S^{'}_{11} = S_{11} c^4 + (2 S_{12} + S_{66}) s^2 c^2 + S_{22} s^4 & \notag \\
+    & S^{'}_{12} = S_{12} (c^4 + s^4) + (S_{11} + S_{22} - S_{66}) s^2 c^2 &  \notag \\
+    & S^{'}_{13} = S_{13} c^2 + S_{23} s^2 & \notag \\
+    & S^{'}_{16} = (2 S_{11} - 2 S_{12} - S_{66}) s c^3 + (2 S_{12} - 2 S_{22} + S_{66}) c s^3 & \notag \\
+    & S^{'}_{22} = S_{11} s^4 + S_{22} c^4 + (2 S_{12} + S_{66}) s^2 c^2 & \notag \\
+    & S^{'}_{23} = S_{13} s^2 + S_{23} c^2 & \notag \\
+    & S^{'}_{26} = (2 S_{12} - 2 S_{22} + S_{66}) s c^3 + (2 S_{11} - 2 S_{12} - S_{66}) c s^3 & \notag \\
+    & S^{'}_{33} = S_{33} & \notag \\
+    & S^{'}_{36} = 2 (S_{13} - S_{23}) s c & \notag \\
+    & S^{'}_{44} = S_{44} c^2 + S_{55} s^2 & \notag \\
+    & S^{'}_{45} = (S_{55} - S_{44}) s c & \notag \\
+    & S^{'}_{55} = S_{44} s^2 + S_{55} c^2 & \notag \\
+    & S^{'}_{66} = 4 (S_{11} - 2 S_{12} + S_{22}) c^2 s^2 + (s^2 - c^2)^2 S_{66}
+    \label{eq:general_compliance}
+\end{flalign}
+
+where 
+
+\begin{equation*}
+    \begin{matrix}
+    S_{11} = \dfrac{1}{E_{11}} & , 
+    S_{12} = -\dfrac{\nu_{12}}{E_{11}} & , 
+    S_{13} = -\dfrac{\nu_{13}}{E_{11}} & ,
+    S_{22} = \dfrac{1}{E_{22}} & ,
+    S_{23} = -\dfrac{\nu_{23}}{E_{22}} & ,
+    S_{33} = \dfrac{1}{E_{33}} & ,
+    S_{44} = \dfrac{1}{\mu_{23}} &
+    \\
+    S_{55} = \dfrac{1}{\mu_{13}} & ,
+    S_{66} = \dfrac{1}{\mu_{12}} & ,
+    c = \cos(\theta) & , 
+    s = \sin(\theta)
+    \end{matrix}
+\end{equation*}
+
+$E_{11}$ is the longitudinal Young's modulus, $E_{22}$ and $E_{33}$ are transverse Young's moduli, $\mu_{12}$ and $\mu_{13}$ are in-plane shear moduli, $\mu_{23}$ is the out-of-plane shear modulus, $\nu_{12}$ and $\nu_{13}$ are in-plane Poisson's ratios and $\nu_{23}$ is the out-of-plane Poisson's ratio. The compliance tensor for an orthotropic laminate is
+
+\begin{equation}
+\bm{S}
+=\begin{bmatrix}
+\dfrac{1}{E_{11}} & -\dfrac{\nu_{12}}{E_{11}} & -\dfrac{\nu_{13}}{E_{11}} & 0 & 0 & 0 \\ 
+-\dfrac{\nu_{12}}{E_{11}} & \dfrac{1}{E_{22}} & -\dfrac{\nu_{23}}{E_{22}} & 0 & 0 & 0 \\ 
+-\dfrac{\nu_{13}}{E_{11}} & -\dfrac{\nu_{23}}{E_{22}} & \dfrac{1}{E_{33}} & 0 & 0 & 0 \\ 
+0 & 0 & 0 & \dfrac{1}{\mu_{23}} & 0 & 0 \\ 
+0 & 0 & 0 & 0 & \dfrac{1}{\mu_{31}} & 0 \\ 
+0 & 0 & 0& 0 & 0 & \dfrac{1}{\mu_{12}}
+\end{bmatrix}
+\label{eq:ortho_compliance}
+\end{equation}

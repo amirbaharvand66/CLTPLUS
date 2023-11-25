@@ -1,0 +1,29 @@
+\section{Mapping \texorpdfstring{$g_n^{(k)} z_k^{-n}$}{} to \texorpdfstring{$c_n^{(k)} \zeta_k^{-n}$}{}} \label{app:mapping}
+
+For a circular hole ($r=1$),
+
+\begin{equation*}
+    \begin{matrix}
+    x = \cos\theta & , 
+    y = \sin\theta
+    \end{matrix}
+\end{equation*}
+
+\begin{align*}
+    \zeta_k & = \dfrac{z_k \pm \sqrt{z_k^2 - s_k^2 - 1}}{1-is_k} = \dfrac{x + s_k y \pm \sqrt{(x + s_k y)^2 - s_k^2 - 1}}{1-is_k} & \\
+    &= \dfrac{\cos\theta + s_k \sin\theta \pm \sqrt{(\cos\theta + s_k \sin\theta)^2 - s_k^2 -1}}{1 - i s_k} & \\
+    & = \dfrac{\cos\theta + s_k \sin\theta \pm \sqrt{\cos^2\theta + s_k^2 \sin^2\theta + 2s_k\cos\theta \sin\theta - s_k^2 -1}}{1 - i s_k}  & \\
+    & = \dfrac{\cos\theta + s_k \sin\theta \pm \sqrt{-(1 - \cos^2\theta) - s_k^2 (1- \sin^2\theta) + 2s_k\cos\theta \sin\theta}}{1 - i s_k}  & \\
+    & = \dfrac{\cos\theta + s_k \sin\theta \pm \sqrt{-\sin^2\theta - s_k^2 \cos^2\theta + 2s_k\cos\theta \sin\theta}}{1 - i s_k}  & \\
+    & = \dfrac{\cos\theta + s_k \sin\theta \pm \sqrt{(\sin^2\theta - s_k^2 \cos^2\theta)^2}}{1 - i s_k}  & \\
+    & = \dfrac{\cos\theta + s_k \sin\theta \pm i(\sin\theta - s_k \cos\theta)}{1 - i s_k}  & \\
+\end{align*}
+
+Let us replace $\pm$ with $\mathfrak{S}$ as it is required to determine the proper sign during the solution. The sign selection is given in Algorithm \ref{alg:sign_selection}.
+
+\begin{align*}
+    \zeta_k & = \dfrac{\cos\theta + s_k \sin\theta + \mathfrak{S} i(\sin\theta - s_k \cos\theta)}{1 - i s_k} \overset{\mathfrak{S}=1}{=} \dfrac{\cos\theta(1-i s_k) + \sin\theta (s_k+i)}{1 - i s_k} & \\
+    & = \dfrac{\cos\theta(1-i s_k) + i \sin\theta (1 - i s_k)}{1 - i s_k} = \cos\theta + i\sin\theta = e^{i\theta} = z  &
+\end{align*}
+
+which is true when we are on the hole edge. In fact, on the hole edge $\zeta_1 = \zeta_2 = z$.

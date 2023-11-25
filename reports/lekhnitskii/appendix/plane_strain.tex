@@ -1,0 +1,72 @@
+\section{Derivation of Compatibility Equation in Terms of Stress Function for the Plane Deformation Case} \label{app:plane_strain}
+
+Let us assume
+
+\begin{equation*}
+    \begin{matrix}
+    u = u(x, y) & , 
+    v = v (x, y) & , 
+    w = 0
+    \end{matrix}
+\end{equation*}
+
+thus we have
+
+\begin{equation*}
+    \begin{matrix}
+    \epsilon_x = \dfrac{\partial u}{\partial x} & , 
+    \epsilon_y = \dfrac{\partial v}{\partial y} & , 
+    \gamma_{xy} = \dfrac{\partial u}{\partial y} + \dfrac{\partial v}{\partial x} & , 
+    \epsilon_z = \gamma_{yz} = \gamma_{zx} = 0
+    \end{matrix}
+\end{equation*}
+
+The stress and strain can be correlated using the inverse of the compliance matrix in \cref{eq:stress_strain} or the so-called reduced transformation matrix, $\bm{Q}$.
+
+\begin{equation}
+\begin{Bmatrix}
+\overline{\epsilon}_x\\ 
+\overline{\epsilon}_y\\ 
+0\\ 
+\overline{\gamma}_{xy}\\
+\end{Bmatrix}
+=\begin{bmatrix}
+Q_{11} & Q_{12} & Q_{13} & Q_{16} \\ 
+Q_{12} & Q_{22} & Q_{23} & Q_{26} \\ 
+Q_{13} & Q_{23} & Q_{33} & Q_{36} \\ 
+Q_{16} & Q_{26} & Q_{36} & Q_{66} 
+\end{bmatrix}
+\begin{Bmatrix}
+\overline{\sigma}_x\\ 
+\overline{\sigma}_y\\ 
+\overline{\sigma}_z\\ 
+\overline{\tau}_{xy}\\
+\end{Bmatrix}
+\label{eq:stress_strain_reduced}
+\end{equation}
+
+where \cite{Lekhnitskii1968}
+
+\begin{equation*}
+    Q_{ij} = S_{ij} - \dfrac{S_{i3} S_{j3}}{S_{33}} \quad\quad (i, j = 1, 2, 6)
+\end{equation*}
+
+$\overline{\sigma}_z$ can be solved from \cref{eq:stress_strain_reduced}.
+
+\begin{equation*}
+    \sigma_z = -\dfrac{Q_{13} \sigma_x + Q_{23} \sigma_y + Q_{36} \tau_{xy}}{Q_{33}}
+\end{equation*}
+
+Invoking \cref{eq:average_stress} and \cref{eq:stress_strain_reduced}, we get an analogous equation to \cref{eq:pde_body_included} with different constants.
+
+\begin{multline*}
+    Q_{22} \frac{\partial^4 \phi}{\partial x^4} - 2 Q_{26} \frac{\partial^4 \phi}{\partial x^3 \partial y} + (2 Q_{12} + Q_{66}) \frac{\partial^4 \phi}{\partial x^2 \partial y^2} - 2 Q_{16} \frac{\partial^4 \phi}{\partial x \partial y^3} + Q_{11} \frac{\partial^4 \phi}{\partial y^4} \\ + (Q_{12} + Q_{22}) \frac{\partial^2 \overline{V}}{\partial x^2} - (Q_{16} + Q_{26}) \frac{\partial^2 \overline{V}}{\partial x \partial y}  + (Q_{11} + Q_{12}) \frac{\partial^2 \overline{V}}{\partial y^2} = 0
+\end{multline*}
+
+which reduces to below, in case of zero body forces.
+
+\begin{equation*}
+    Q_{22} \frac{\partial^4 \phi}{\partial x^4} - 2 Q_{26} \frac{\partial^4 \phi}{\partial x^3 \partial y} + (2 Q_{12} + Q_{66}) \frac{\partial^4 \phi}{\partial x^2 \partial y^2} - 2 Q_{16} \frac{\partial^4 \phi}{\partial x \partial y^3} + Q_{11} \frac{\partial^4 \phi}{\partial y^4} = 0
+\end{equation*}
+
+See \texttt{pde$\_$plane$\_$strain.mw} for the corresponding Maple file. 

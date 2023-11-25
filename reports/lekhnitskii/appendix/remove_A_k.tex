@@ -1,0 +1,19 @@
+\section{Derivation of \texorpdfstring{$A_k$}{} constants for A Harmonic Load on the Hole Edge} \label{app:remove_A_k}
+
+For the general case of harmonic load, \cref{eq:harmonic_load}, we replace $X$ and $Y$ in \cref{eq:A_k_1} by \cref{eq:decompose_N_T}.
+
+\begin{gather*}
+    2 \mathfrak{Re}[s_1 A_1 \ln z_1 + s_2 A_2 \ln z_2]  \begin{matrix} s_1 \\ s_0 \end{matrix} = 
+-\displaystyle\int_{s_0}^{s_1}{N(m, \theta) \cos\theta - T(m, \theta) \sin\theta} \mathrm{d}s \\
+    2 \mathfrak{Re}[A_1 \ln z_1 + A_2 \ln z_2]     \begin{matrix}  s_1 \\ s_0 \end{matrix}
+= \displaystyle\int_{s_0}^{s_1}{N(m, \theta) \cos\theta + T(m, \theta) \sin\theta}\mathrm{d}s
+\end{gather*}
+
+Integrating on the hole ($0 \leq \theta \leq 2\pi$)
+
+\begin{gather*}
+    s_1 A_1 + s_2 A_2 - \overline{s_1} \overline{A_1} - \overline{s_2} \overline{A_2} = -\displaystyle\int_{0}^{2\pi}{N(m, \theta) \cos\theta - T(m, \theta) \sin\theta} \mathrm{d}\theta = 0 \\
+    A_1 + A_2 - \overline{A_1} - \overline{A_2} = \displaystyle\int_{0}^{2\pi}{N(m, \theta) \cos\theta + T(m, \theta) \sin\theta}\mathrm{d}\theta = 0
+\end{gather*}
+
+Due to the absence of the resultant load, $R_x = R_y = 0$ on the hole edge, as is the case for the harmonic traction, then $A_1 = A_2 = \overline{A_1} = \overline{A_2} = 0$; thus, $\displaystyle\sum_{k=1}^{2}{A_k \ln z_k}$ vanishes.

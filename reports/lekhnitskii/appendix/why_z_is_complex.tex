@@ -1,0 +1,49 @@
+\section{Proof of \texorpdfstring{$\phi(x, y) = f(z)$}{}}\label{app:why_z_is_complex}
+The proof of this section is provided in \cite{Koussios2015}. The compatibility equation in terms of potential stress function reduces to below based on the assumptions in \cref{sec:solve_pde}.
+
+\begin{equation*}
+    r^2 \frac{\partial^4 \phi(x, y)}{\partial x^4} + 2a \frac{\partial^4 \phi(x, y)}{\partial x^2 \partial y^2} + \frac{\partial^4 \phi(x, y)}{\partial y^4} = 0
+\end{equation*}
+
+Using the "," operator instead of partial differentiation, the above equation becomes
+
+\begin{equation*}
+    r^2 \phi(x, y)_{,xxxx} + 2a \phi(x, y)_{,xxyy} + \phi(x, y)_{,yyyy} = 0
+\end{equation*}
+
+Replace $r^2$ and $2a$ with $\xi^2\lambda^2$ and $-(\xi^2 + \lambda^2)$, where both $\xi$ and $\lambda$ are independent constants.
+
+\begin{gather*}
+    \xi^2\lambda^2 \phi(x, y)_{,xxxx} -(\xi^2 + \lambda^2) \phi(x, y)_{,xxyy} + \phi(x, y)_{,yyyy} = 0 \notag\\
+    (\xi^2 \phi(x, y)_{,xx} - \phi(x, y)_{,yy})(\lambda^2 \phi(x, y)_{,xx} - \phi(x, y)_{,yy}) = 0 \notag\\
+    (\xi \phi(x, y)_{,x} + \phi(x, y)_{,y}) (\xi \phi(x, y)_{,x} - \phi(x, y)_{,y}) (\lambda \phi(x, y)_{,x} + \phi(x, y)_{,y}) (\lambda \phi(x, y)_{,x} - \phi(x, y)_{,y}) = 0
+\end{gather*}
+
+As a result, each term in the last line of the above set of equations should be zero. Let us continue with $\xi \phi(x, y)_{,x} - \phi(x, y)_{,y}$. The same strategy is applicable to the rest of the terms. 
+
+\begin{gather*}
+    \xi \phi(x, y)_{,x} - \phi(x, y)_{,y} = 0\notag\\
+    \{ \phi(x, y)_{,x} \quad \phi(x, y)_{,y}\} 
+    \begin{Bmatrix}
+    \xi\\ 
+    -1
+    \end{Bmatrix} = 0
+\end{gather*}
+
+for the above equation to be valid, 
+
+\begin{equation*}
+    \begin{Bmatrix}
+    \phi(x, y)_{,x}\\ 
+    \phi(x, y)_{,y}
+    \end{Bmatrix} = 
+    \begin{Bmatrix}
+    1\\ 
+    \xi
+    \end{Bmatrix}
+\end{equation*}
+
+The function that satisfies the above is $\phi(x, y) = f(x + \xi y)$ which is a complex function.
+
+
+

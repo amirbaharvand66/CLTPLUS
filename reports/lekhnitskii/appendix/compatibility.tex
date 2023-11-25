@@ -1,0 +1,27 @@
+\section{Derivation of the Compatibility Equation} \label{app:compatibility_eqn}
+
+The strain-displacement relation is
+
+\begin{equation*}
+    \begin{matrix}
+    \epsilon_x = \dfrac{\partial u}{\partial x} & , 
+    \epsilon_y = \dfrac{\partial v}{\partial y} & , 
+    \gamma_{xy} = \dfrac{\partial u}{\partial y} + \dfrac{\partial v}{\partial x}
+    \end{matrix}
+\end{equation*}
+
+Differentiating $\epsilon_x$ and $\epsilon_y$ w.r.t $y$ and $x$ twice together with differentiating $\gamma_{xy}$ w.r.t $x$ and then $y$ give
+
+\begin{equation*}
+    \begin{matrix}
+    \dfrac{\partial^2 \epsilon_x}{\partial y^2} = \dfrac{\partial^3 u}{\partial y^2 \partial x} & , 
+    \dfrac{\partial^2 \epsilon_y}{\partial x^2} = \dfrac{\partial^3 v}{\partial x^2 \partial y} & ,
+    \dfrac{\partial^2 \gamma_{xy}}{\partial x \partial y} = \dfrac{\partial^3 u}{\partial x \partial y^2} + \dfrac{\partial^3 v}{\partial x^2 \partial y}
+    \end{matrix}
+\end{equation*}
+
+Summing the first two terms and then subtracting the third term yield the compatibility equation.
+
+\begin{equation*}
+    \dfrac{\partial^2 \epsilon_x}{\partial y^2} + \dfrac{\partial^2 \epsilon_y}{\partial x^2} - \dfrac{\partial^2 \gamma_{xy}}{\partial x \partial y} = 0
+\end{equation*}

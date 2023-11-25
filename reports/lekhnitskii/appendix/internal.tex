@@ -1,0 +1,43 @@
+\section{Derivation of Traction Equation on the Internal Boundary Due to An Opening}\label{app:internal}
+
+\begin{equation*}
+\left\{\begin{matrix}
+    \left(\dfrac{\partial^2 \phi}{\partial y^2} + V \right) \dfrac{-\mathrm{d}y}{\mathrm{d}s} - \dfrac{\partial^2 \phi}{\partial x \partial y}  \dfrac{\mathrm{d}x}{\mathrm{d}s} = X   \\
+    \\
+    \dfrac{\partial^2 \phi}{\partial x \partial y}  \dfrac{\mathrm{d}y}{\mathrm{d}s} + \left( \dfrac{\partial^2 \phi}{\partial x^2} + V \right) \dfrac{-\mathrm{d}x}{\mathrm{d}s} = Y  
+\end{matrix}\right.
+\end{equation*}
+%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+\left\{\begin{matrix}
+    \dfrac{\partial^2 \phi}{\partial y^2} \dfrac{\mathrm{d}y}{\mathrm{d}s} + \dfrac{\partial^2 \phi}{\partial x \partial y}  \dfrac{\mathrm{d}x}{\mathrm{d}s} = -X - V \dfrac{\mathrm{d}y}{\mathrm{d}s} \\
+    \\
+    \dfrac{\partial^2 \phi}{\partial x \partial y}  \dfrac{\mathrm{d}y}{\mathrm{d}s} + \dfrac{\partial^2 \phi}{\partial x^2} \dfrac{\mathrm{d}x}{\mathrm{d}s} = Y - V \dfrac{\mathrm{d}x}{\mathrm{d}s}  
+\end{matrix}\right.
+\end{equation*}
+%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+\left\{\begin{matrix}
+    \dfrac{\partial}{\partial y}\left( \dfrac{\partial \phi}{\partial y} \right) \dfrac{\mathrm{d}y}{\mathrm{d}s} + \dfrac{\partial}{\partial x}\left( \dfrac{\partial \phi}{\partial y} \right) \dfrac{\mathrm{d}x}{\mathrm{d}s} = -X - V \dfrac{\mathrm{d}y}{\mathrm{d}s}\\
+    \\
+    \dfrac{\partial}{\partial y}\left( \dfrac{\partial \phi}{\partial x} \right) \dfrac{\mathrm{d}y}{\mathrm{d}s} + \dfrac{\partial}{\partial x}\left( \dfrac{\partial \phi}{\partial x} \right) \dfrac{\mathrm{d}x}{\mathrm{d}s} = Y - V \dfrac{\mathrm{d}x}{\mathrm{d}s}  
+\end{matrix}\right.
+\end{equation*}
+
+From \cref{eq:ds}
+
+\begin{equation*}
+\left\{\begin{matrix}
+    \dfrac{\partial}{\partial s}\left( \dfrac{\partial \phi}{\partial y} \right) = -X - V \dfrac{\mathrm{d}y}{\mathrm{d}s}\\
+    \\
+    \dfrac{\partial}{\partial y}\left( \dfrac{\partial \phi}{\partial x} \right) = Y - V \dfrac{\mathrm{d}x}{\mathrm{d}s}  
+\end{matrix}\right.
+\end{equation*}
+%%%%%%%%%%%%%%%%%%%%
+\begin{equation*}
+\left\{\begin{matrix}
+    \dfrac{\partial \phi}{\partial y} = \displaystyle\int_{s_0}^{s_1}{\left (-X - V \dfrac{\mathrm{d}y}{\mathrm{d}s}\right)} \mathrm{d}s + c_3\\
+    \\
+    \dfrac{\partial \phi}{\partial x} = \displaystyle\int_{s_0}^{s_1}{\left(Y - V \dfrac{\mathrm{d}x}{\mathrm{d}s}\right)}\mathrm{d}s + c_4\\ 
+\end{matrix}\right.
+\end{equation*}

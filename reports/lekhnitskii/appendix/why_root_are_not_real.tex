@@ -1,0 +1,38 @@
+\section{Determination of the Characteristic Equation Roots}\label{app:complex_imag_roots}
+For an ideal elastic body $r+a$ is always positive.
+
+\begin{gather*}
+    r = \sqrt{\dfrac{S_{22}}{S_{11}}} = \sqrt{\dfrac{E_{11}}{E_{22}}} > 0
+\end{gather*}
+
+For an ideal elastic laminate, $0<\nu_{12}<\dfrac{1}{2}$.
+
+\begin{gather*}
+    2a = \dfrac{2S_{12} + S_{66}}{S_{11}} = \dfrac{-2\dfrac{\nu_{12}}{E_{11}} + \dfrac{1}{\mu_{12}}}{\dfrac{1}{E_{11}}} = \dfrac{E_{11} - 2 \mu_{12} \nu_{12}}{\mu_{12}} \xrightarrow[]{E_{11}>\mu_{12}>0} \dfrac{E_{11} - 2 \mu_{12} \nu_{12}}{\mu_{12}} > 0
+\end{gather*}
+
+Next, for 
+
+\subsubsection*{Case 1: \texorpdfstring{$r - a\geq 0$}{}}
+
+\begin{gather}
+    s_1 = \sqrt{\dfrac{r-a}{2}} + i \sqrt{\dfrac{r+a}{2}} \notag\\
+    s_2 = -\sqrt{\dfrac{r-a}{2}} + i \sqrt{\dfrac{r+a}{2}} \notag\\
+    s_3 = \sqrt{\dfrac{r-a}{2}} - i \sqrt{\dfrac{r+a}{2}} \notag\\
+    s_4 = -\sqrt{\dfrac{r-a}{2}} - i \sqrt{\dfrac{r+a}{2}}
+    \label{eq:s1_s4_complex}
+\end{gather}
+
+then, $s_1$ to $s_4$ are all complex.
+
+\subsubsection*{Case 2: \texorpdfstring{$r - a < 0$}{}}
+
+\begin{gather}
+    s_1 = i \left( \sqrt{\dfrac{a-r}{2}} + \sqrt{\dfrac{r+a}{2}} \right) \notag\\
+    s_2 = i \left( -\sqrt{\dfrac{a-r}{2}} + \sqrt{\dfrac{r+a}{2}} \right) \notag\\
+    s_3 = -i \left( -\sqrt{\dfrac{a-r}{2}} + \sqrt{\dfrac{r+a}{2}} \right) \notag\\
+    s_4 = -i \left( \sqrt{\dfrac{a-r}{2}} + \sqrt{\dfrac{r+a}{2}} \right)
+    \label{eq:s1_s4_imaginary}
+\end{gather}
+
+then, $s_1$ to $s_4$ are all imaginary.

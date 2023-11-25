@@ -1,0 +1,61 @@
+\section{On the Selection of Hole Radius}\label{app:why_r_is_one}
+Take the general case of an ellipse in polar coordinate system where
+
+\begin{equation*}
+    \begin{matrix}
+    x = d \cos\theta & , 
+    y = b \sin\theta
+    \end{matrix}
+\end{equation*}
+
+$z$ in its complex form can be written as 
+
+\begin{align*}
+    z & =  x + iy = d \cos\theta + i b \sin\theta \overset{(1)}{=} d \cos\theta - i d \sin\theta + i b \sin\theta + i d \sin\theta \overset{(2)}{=} d e^{i\theta} + i(b-d)\sin\theta & \\
+    & \overset{(3)}{=} d e^{i\theta} + \left( \dfrac{b -d}{2} \right) (e^{i\theta} - e^{-i\theta}) = \left(\dfrac{b+d}{2} \right) e^{i\theta} - \left( \dfrac{b-d}{2} \right) e^{-i\theta}
+\end{align*}
+
+where we 
+
+\begin{align*}
+    \begin{matrix}
+    \text{added and subtract} & i d \sin\theta \quad & \text{in (1)}
+    \end{matrix} \\
+    \begin{matrix}
+    \text{utilized Euler's formula} & e^{-i\theta} = \cos \theta - i \sin \theta \quad & \text{in (2)}
+    \end{matrix} \\
+\end{align*}
+
+\begin{align*}
+    \begin{matrix}
+    \text{replaced} & \sin\theta = \dfrac{e^{i\theta} - e^{-i\theta}}{2} \quad & \text{in (3)}
+    \end{matrix}
+\end{align*}
+
+Based on the above equation \cite{Jong1987}
+
+\begin{align*}
+    z_k = & \left(\dfrac{d - i s_k b}{2} \right) e^{i\theta} + \left( \dfrac{d + i s_k b}{2} \right) e^{-i\theta} & \\
+    \overset{z = e^{i\theta}}{=} & \left(\dfrac{d - i s_k b}{2} \right) z + \left( \dfrac{d + i s_k b}{2} \right) \dfrac{1}{z} & \\
+    \Rightarrow & (d - i s_k b) z^2  - 2 z_k z + (d + i s_k b)= 0
+\end{align*}
+
+Solving for the roots, $\zeta_k$, of the above equation (we use $\zeta_k$ instead of $z_k$ to avoid possible misinterpretation caused by $z_k$ in \cref{eq:phi_in_form_f} to \cref{eq:final_sol})
+
+\begin{equation}
+    \begin{matrix}
+    \zeta_k = \dfrac{2 z_k \pm \sqrt{4 z_k^2 - 4(d + i s_k b) (d - i s_k b)}}{d - i s_k b} = \dfrac{z_k \pm \sqrt{z_k^2 - s_k^2 b^2 - d^2}}{d - i s_k b} &
+    \text{where} \quad k = 1, 2
+    \end{matrix}
+    \label{eq:zeta_k_ellipse}
+\end{equation}
+
+For a circular opening ($d=b=1$) with a radius $r$, to be on the edge, $|z|=r$, and
+
+\begin{equation}
+    \zeta_k = \dfrac{z_k/r \pm \sqrt{(z_k/r)^2 - s_k^2 - 1}}{1 - i s_k}
+    \label{eq:zeta_k_circle}
+\end{equation}
+
+The unitless parameter $z_k/r$, on the circle, can be replaced with unity; hence, $z_k/r$ can be simply written as $z_k$ and the hole radius can be assumed as one.
+
